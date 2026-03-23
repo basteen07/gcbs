@@ -34,7 +34,7 @@ export default function AnnouncementsPage() {
 
   const openEdit = (a: Announcement) => {
     setEditing(a)
-    setForm({ ...form, ...a, startsAt: a.startsAt || '', endsAt: a.endsAt || '' })
+    setForm({ ...form, ...a, startsAt: a.startsAt || '', endsAt: a.endsAt || '', ctaLabel: a.ctaLabel || '', ctaUrl: a.ctaUrl || '' })
     setShowForm(true)
   }
 
