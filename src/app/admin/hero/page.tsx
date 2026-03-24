@@ -158,7 +158,6 @@ export default function HeroPage() {
             onChange={(url) => setForm(f => ({ ...f, mobileImageUrl: url }))}
             placeholder="https://images.unsplash.com/..."
           />
-        </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="form-label">Overlay Color</label>
