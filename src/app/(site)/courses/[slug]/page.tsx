@@ -5,11 +5,12 @@ import { notFound } from 'next/navigation'
 import { Clock, Award, Globe, CheckCircle2, ChevronRight } from 'lucide-react'
 import type { Metadata } from 'next'
 
-type Props = { params: { slug: string } }
+type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
   try {
-    const course = await prisma.course.findUnique({ where: { slug: params.slug } })
+    const course = await prisma.course.findUnique({ where: { slug } })
     if (!course) return { title: 'Course Not Found' }
     return {
       title: course.metaTitle || course.title,
@@ -19,10 +20,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function CourseDetailPage({ params }: Props) {
+  const { slug } = await params
   let course: any
   try {
     course = await prisma.course.findUnique({
-      where: { slug: params.slug, isActive: true },
+      where: { slug, isActive: true },
       include: { category: true },
     })
   } catch {

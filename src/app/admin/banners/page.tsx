@@ -40,7 +40,15 @@ export default function BannersPage() {
 
   const openEdit = (b: Banner) => {
     setEditing(b)
-    setForm({ ...form, ...b, sortOrder: 0 })
+    setForm({
+      ...form,
+      ...b,
+      ctaLabel: b.ctaLabel || '',
+      ctaUrl: b.ctaUrl || '',
+      desktopImageUrl: b.desktopImageUrl || '',
+      mobileImageUrl: b.mobileImageUrl || '',
+      sortOrder: 0
+    })
     setShowForm(true)
   }
 

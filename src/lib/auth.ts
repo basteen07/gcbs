@@ -32,7 +32,7 @@ export async function verifyToken(token: string) {
 }
 
 export async function getAdminSession() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const token = cookieStore.get('admin_token')?.value
   if (!token) return null
   return verifyToken(token)

@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
         privacyConsent:   data.privacyConsent,
         marketingConsent: data.marketingConsent ?? false,
         status:           'NEW',
-        ipAddress:        req.headers.get('x-forwarded-for') || req.ip,
+        ipAddress:        req.headers.get('x-forwarded-for'),
         userAgent:        req.headers.get('user-agent'),
         pageUrl:          req.headers.get('referer'),
         source:           'website_cta',
