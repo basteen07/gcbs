@@ -133,7 +133,7 @@ export default function AnnouncementsPage() {
                 </div>
                 <div>
                   <label className="form-label">CTA URL</label>
-                  <input value={form.ctaUrl} onChange={F('ctaUrl')} className="form-input" placeholder="/admissions/apply" />
+                  <input value={form.ctaUrl} onChange={F('ctaUrl')} className="form-input" placeholder="/contact" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">

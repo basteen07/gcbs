@@ -14,7 +14,7 @@ async function getHomeData() {
     prisma.heroSection.findUnique({ where: { page: 'home' } }),
     prisma.stat.findMany({ where: { isActive: true }, orderBy: { sortOrder: 'asc' } }),
     prisma.course.findMany({
-      where: { isActive: true, isFeatured: true },
+      where: { isActive: true },
       include: { category: true },
       orderBy: { sortOrder: 'asc' },
       take: 6,

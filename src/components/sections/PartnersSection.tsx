@@ -31,6 +31,7 @@ export function PartnersSection({ partners }: { partners?: Partner[] }) {
                 width={140}
                 height={50}
                 className="object-contain h-10 w-auto"
+                unoptimized
               />
             </div>
           ))}
@@ -74,6 +75,7 @@ export function GalleryPreview() {
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 768px) 50vw, 33vw"
+                unoptimized
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-end p-3">
                 <span className="text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">

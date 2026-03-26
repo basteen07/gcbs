@@ -9,11 +9,11 @@
   --font-dm-sans:  'DM Sans', system-ui, sans-serif;
 
   /* Brand tokens */
-  --brand-gold:      #c8860a;
-  --brand-espresso:  #1a0d08;
-  --brand-cream:     #fdf8f0;
-  --brand-coffee:    #7d5130;
-  --brand-light:     #f9eedb;
+  --brand-gold:      #8033CC;
+  --brand-espresso:  #1f0533;
+  --brand-cream:     #f5f3ff;
+  --brand-coffee:    #6b24a8;
+  --brand-light:     #ede8ff;
 
   --nav-height: 80px;
 }
@@ -35,6 +35,21 @@
   h1, h2, h3, h4, h5 {
     font-family: var(--font-playfair);
     line-height: 1.15;
+  }
+
+  /* Non-heading body text follows parent contrast color */
+  :where(p, span, li, a, label, small, em, strong, button, input, textarea, select, td, th, figcaption) {
+    color: inherit;
+  }
+
+  /* Dark backgrounds -> white body text (headings excluded by rule above) */
+  :where(.bg-coffee-900, .bg-coffee-950, .bg-espresso-900, .bg-espresso-950, .bg-black, .bg-neutral-900, .bg-neutral-950) {
+    color: #fff;
+  }
+
+  /* Light backgrounds -> black body text (headings excluded by rule above) */
+  :where(.bg-white, .bg-cream-50, .bg-cream-100, .bg-coffee-50, .bg-coffee-100, .bg-espresso-50, .bg-espresso-100) {
+    color: #000;
   }
 }
 

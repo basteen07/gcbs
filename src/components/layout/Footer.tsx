@@ -80,7 +80,7 @@ export default function Footer() {
                 { label: 'Barista Certification', href: '/courses/barista-certification' },
                 { label: 'Advanced Café Operations', href: '/courses/advanced-cafe-operations' },
                 { label: 'Postgraduate Diploma', href: '/courses/postgraduate-diploma' },
-                { label: 'Apply Now', href: '/admissions/apply' },
+                { label: 'Apply Now', href: '/contact' },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="text-sm text-coffee-400 hover:text-espresso-400 transition-colors">

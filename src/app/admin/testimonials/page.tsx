@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Plus, Pencil, Trash2, Star, Eye, EyeOff } from 'lucide-react'
+import ImageUploadField from '@/components/admin/ImageUploadField'
 
 type Testimonial = {
   id: string; name: string; role?: string | null; courseTitle?: string | null;
@@ -152,15 +153,16 @@ export default function TestimonialsPage() {
                   {[5,4,3,2,1].map(n => <option key={n} value={n}>{n} Stars</option>)}
                 </select>
               </div>
-              <div>
-                <label className="form-label text-xs">Photo Desktop URL <span className="text-gray-400">(200×200px square)</span></label>
-                <input value={form.photoDesktop} onChange={F('photoDesktop')} className="form-input" placeholder="https://..." />
-                {form.photoDesktop && <img src={form.photoDesktop} className="mt-2 w-16 h-16 object-cover rounded-full" alt="" />}
-              </div>
-              <div>
-                <label className="form-label text-xs">Photo Mobile URL <span className="text-gray-400">(160×160px square)</span></label>
-                <input value={form.photoMobile} onChange={F('photoMobile')} className="form-input" placeholder="https://..." />
-              </div>
+              <ImageUploadField
+                label="Photo Desktop (200×200px square)"
+                value={form.photoDesktop}
+                onChange={(url) => setForm(f => ({ ...f, photoDesktop: url }))}
+              />
+              <ImageUploadField
+                label="Photo Mobile (160×160px square)"
+                value={form.photoMobile}
+                onChange={(url) => setForm(f => ({ ...f, photoMobile: url }))}
+              />
               <div className="flex gap-6">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" checked={form.isActive} onChange={F('isActive')} className="rounded" />

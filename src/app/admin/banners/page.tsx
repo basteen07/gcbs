@@ -186,7 +186,7 @@ export default function BannersPage() {
                 </div>
                 <div>
                   <label className="form-label">CTA URL</label>
-                  <input value={form.ctaUrl} onChange={e => setForm({...form, ctaUrl: e.target.value})} className="form-input" placeholder="/admissions/apply" />
+                  <input value={form.ctaUrl} onChange={e => setForm({...form, ctaUrl: e.target.value})} className="form-input" placeholder="/contact" />
                 </div>
               </div>
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Plus, Pencil, Trash2, Eye, EyeOff } from 'lucide-react'
+import ImageUploadField from '@/components/admin/ImageUploadField'
 
 type Member = {
   id: string; name: string; title: string; department?: string | null;
@@ -138,15 +139,16 @@ export default function TeamPage() {
                 <label className="form-label">Bio</label>
                 <textarea value={form.bio} onChange={F('bio')} rows={3} className="form-input resize-none" />
               </div>
-              <div>
-                <label className="form-label text-xs">Photo Desktop URL <span className="text-gray-400">(400×500px portrait)</span></label>
-                <input value={form.photoDesktop} onChange={F('photoDesktop')} className="form-input" placeholder="https://..." />
-                {form.photoDesktop && <img src={form.photoDesktop} className="mt-2 w-20 h-24 object-cover rounded-xl" alt="" />}
-              </div>
-              <div>
-                <label className="form-label text-xs">Photo Mobile URL <span className="text-gray-400">(300×380px tighter crop)</span></label>
-                <input value={form.photoMobile} onChange={F('photoMobile')} className="form-input" placeholder="https://..." />
-              </div>
+              <ImageUploadField
+                label="Photo Desktop (400×500px portrait)"
+                value={form.photoDesktop}
+                onChange={(url) => setForm(f => ({ ...f, photoDesktop: url }))}
+              />
+              <ImageUploadField
+                label="Photo Mobile (300×380px tighter crop)"
+                value={form.photoMobile}
+                onChange={(url) => setForm(f => ({ ...f, photoMobile: url }))}
+              />
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="form-label">Email</label>

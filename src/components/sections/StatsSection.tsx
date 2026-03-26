@@ -11,11 +11,11 @@ export default function StatsSection({ stats }: { stats?: Stat[] }) {
   const items = stats?.length ? stats : FALLBACK_STATS
 
   return (
-    <section id="stats" className="bg-coffee-950 py-16 relative overflow-hidden">
+    <section id="stats" className="bg-white py-16 relative overflow-hidden text-coffee-900">
       {/* Subtle pattern */}
       <div className="absolute inset-0 opacity-5"
         style={{
-          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(200,134,10,0.3) 35px, rgba(200,134,10,0.3) 70px)`,
+          backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(125,81,48,0.2) 35px, rgba(125,81,48,0.2) 70px)`,
         }}
       />
       <div className="container-main relative z-10">
@@ -28,12 +28,12 @@ export default function StatsSection({ stats }: { stats?: Stat[] }) {
                 </div>
               )}
               <div
-                className="text-4xl md:text-5xl font-bold text-espresso-400 mb-2"
+                className="text-4xl md:text-5xl font-bold text-coffee-950 mb-2"
                 style={{ fontFamily: 'var(--font-playfair)' }}
               >
                 {stat.value}
               </div>
-              <div className="text-sm text-coffee-400 font-medium">{stat.label}</div>
+              <div className="text-sm text-coffee-600 font-medium">{stat.label}</div>
             </div>
           ))}
         </div>

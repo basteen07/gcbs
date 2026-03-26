@@ -4,50 +4,70 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Menu, X, ChevronDown, Phone, Mail } from 'lucide-react'
+import logo from '../../logo.jpeg'
 
-const navLinks = [
+type Course = {
+  id: string
+  title: string
+  slug: string
+}
+
+const staticLinks = [
   { label: 'About', href: '/about' },
-  {
-    label: 'Programmes',
-    href: '/courses',
-    sub: [
-      { label: 'Diploma in Café Management', href: '/courses/diploma-cafe-management' },
-      { label: 'Barista Certification', href: '/courses/barista-certification' },
-      { label: 'Advanced Café Operations', href: '/courses/advanced-cafe-operations' },
-      { label: 'Postgraduate Diploma', href: '/courses/postgraduate-diploma' },
-      { label: 'View All Programmes', href: '/courses' },
-    ],
-  },
-  { label: 'Admissions', href: '/admissions' },
-  { label: 'Gallery', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
 ]
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [courses, setCourses] = useState<Course[]>([])
+  const [loadingCourses, setLoadingCourses] = useState(true)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', onScroll)
-    return () => window.removeEventListener('scroll', onScroll)
+    const fetchCourses = async () => {
+      try {
+        const res = await fetch('/api/admin/courses')
+        const data = await res.json()
+        if (Array.isArray(data)) {
+          setCourses(data.filter(c => c.isActive).map(c => ({ id: c.id, title: c.title, slug: c.slug })))
+        }
+      } catch (error) {
+        console.error('Failed to fetch courses:', error)
+      } finally {
+        setLoadingCourses(false)
+      }
+    }
+    fetchCourses()
   }, [])
+
+  const navLinks = [
+    { label: 'About', href: '/about' },
+    {
+      label: 'Programmes',
+      href: '/courses',
+      sub: [
+        ...courses.map(course => ({ label: course.title, href: `/courses/${course.slug}` })),
+        { label: 'View All Programmes', href: '/courses', divider: true },
+      ],
+    },
+    { label: 'Contact', href: '/contact' },
+  ]
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-md' : 'bg-transparent'
-      }`}
-      style={{ top: 'var(--announcement-height, 40px)' }}
+      className="sticky top-0 left-0 right-0 z-50 bg-white shadow-md transition-all duration-300"
     >
       <div className="container-main">
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-full bg-espresso-500 flex items-center justify-center text-white text-xl font-bold shadow-lg group-hover:scale-105 transition-transform">
-              ☕
-            </div>
+            <Image
+              src={logo}
+              alt="Global Café Business School Logo"
+              width={80}
+              height={85}
+              className="group-hover:scale-100 transition-transform"
+            />
             <div>
               <div
                 className="text-lg font-bold leading-tight text-coffee-950"
@@ -90,12 +110,10 @@ export default function Navbar() {
                     <div className="bg-white rounded-2xl shadow-2xl border border-coffee-100 overflow-hidden min-w-[260px]">
                       {link.sub.map((sub, i) => (
                         <Link
-                          key={sub.href}
+                          key={sub.href + i}
                           href={sub.href}
                           className={`block px-5 py-3 text-sm text-coffee-800 hover:bg-espresso-50 hover:text-espresso-700 transition-colors ${
-                            i === link.sub!.length - 1
-                              ? 'border-t border-coffee-100 font-semibold text-espresso-600'
-                              : ''
+                            (sub as any).divider ? 'border-t border-coffee-100 font-semibold text-espresso-600' : ''
                           }`}
                           onClick={() => setActiveDropdown(null)}
                         >
@@ -115,7 +133,7 @@ export default function Navbar() {
               <Phone size={14} />
               +65 0000 0000
             </Link>
-            <Link href="/admissions/apply" className="btn-primary text-sm py-3 px-6">
+            <Link href="/contact" className="btn-primary text-sm py-3 px-6">
               Apply Now
             </Link>
           </div>
@@ -146,7 +164,7 @@ export default function Navbar() {
                 </Link>
                 {link.sub && (
                   <div className="ml-4 border-l-2 border-espresso-200 pl-4 space-y-0.5">
-                    {link.sub.slice(0, -1).map((sub) => (
+                    {link.sub.filter(sub => !(sub as any).divider).map((sub) => (
                       <Link
                         key={sub.href}
                         href={sub.href}
@@ -156,6 +174,13 @@ export default function Navbar() {
                         {sub.label}
                       </Link>
                     ))}
+                    <Link
+                      href="/courses"
+                      className="block py-2 text-sm font-semibold text-espresso-600 border-t border-espresso-200 pt-3 mt-2 hover:text-espresso-700 transition-colors"
+                      onClick={() => setOpen(false)}
+                    >
+                      View All Programmes
+                    </Link>
                   </div>
                 )}
               </div>
@@ -166,7 +191,7 @@ export default function Navbar() {
                 +65 0000 0000
               </Link>
               <Link
-                href="/admissions/apply"
+                href="/contact"
                 className="btn-primary w-full justify-center"
                 onClick={() => setOpen(false)}
               >

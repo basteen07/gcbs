@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import {
   LayoutDashboard, Image, Layers, BookOpen, Users,
   MessageSquare, Star, GalleryHorizontal, Settings,
-  LogOut, Coffee, Megaphone
+  LogOut, Coffee, Megaphone, Grid3x3
 } from 'lucide-react'
 
 const sections = [
@@ -21,6 +21,7 @@ const sections = [
       { href: '/admin/hero',     icon: Layers,            label: 'Hero Sections' },
       { href: '/admin/banners',  icon: Image,             label: 'Banners' },
       { href: '/admin/announcements', icon: Megaphone,    label: 'Announcements' },
+      { href: '/admin/course-categories', icon: Grid3x3, label: 'Categories' },
       { href: '/admin/courses',  icon: BookOpen,          label: 'Courses' },
     ],
   },

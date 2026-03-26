@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -20,20 +20,32 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
-const courses = [
-  'Diploma in Café Management',
-  'Barista Certification Programme',
-  'Advanced Café Operations',
-  'Coffee Roasting & Sourcing',
-  'Postgraduate Diploma in Café Business',
-  'Hospitality & Café Service',
-  'Not sure yet — please advise',
-]
+type Course = {
+  id: string
+  title: string
+  slug: string
+}
 
 export default function CtaSection() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [courses, setCourses] = useState<Course[]>([])
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const res = await fetch('/api/admin/courses')
+        const data = await res.json()
+        if (Array.isArray(data)) {
+          setCourses(data.filter(c => c.isActive))
+        }
+      } catch (error) {
+        console.error('Failed to fetch courses:', error)
+      }
+    }
+    fetchCourses()
+  }, [])
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -59,7 +71,7 @@ export default function CtaSection() {
   }
 
   return (
-    <section id="apply" className="section-padding bg-cream-100">
+    <section id="apply" className="section-padding bg-white">
       <div className="container-main">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left */}
@@ -142,7 +154,8 @@ export default function CtaSection() {
                   <label className="form-label">Course Interest *</label>
                   <select {...register('courseInterest')} className="form-input">
                     <option value="">Select a programme...</option>
-                    {courses.map((c) => <option key={c} value={c}>{c}</option>)}
+                    {courses.map((c) => <option key={c.id} value={c.title}>{c.title}</option>)}
+                    <option value="Not sure yet — please advise">Not sure yet — please advise</option>
                   </select>
                   {errors.courseInterest && <p className="form-error">{errors.courseInterest.message}</p>}
                 </div>

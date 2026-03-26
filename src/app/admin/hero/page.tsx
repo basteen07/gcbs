@@ -130,7 +130,7 @@ export default function HeroPage() {
           </div>
           <div>
             <label className="form-label">Primary CTA URL</label>
-            <input value={form.ctaPrimaryUrl || ''} onChange={F('ctaPrimaryUrl')} className="form-input" placeholder="/admissions/apply" />
+            <input value={form.ctaPrimaryUrl || ''} onChange={F('ctaPrimaryUrl')} className="form-input" placeholder="/contact" />
           </div>
           <div>
             <label className="form-label">Secondary CTA Label</label>

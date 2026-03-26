@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { sendEnquiryEmail } from '@/lib/mail'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -41,6 +42,22 @@ export async function POST(req: NextRequest) {
         source:           'website_cta',
       },
     })
+
+    // Send email confirmation
+    try {
+      await sendEnquiryEmail({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        courseInterest: data.courseInterest || 'Not specified',
+        studentType: data.studentType,
+        message: data.message,
+      })
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError)
+      // Don't fail the enquiry if email fails - still return success
+    }
 
     return NextResponse.json({ success: true, id: candidate.id }, { status: 201 })
   } catch (err) {

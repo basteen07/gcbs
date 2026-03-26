@@ -26,7 +26,7 @@ const FALLBACK = {
   bodyText:
     'Learn the art and science of coffee from industry professionals. Our hands-on training prepares students for careers in cafés, restaurants, hotels, and coffee businesses.',
   ctaPrimary: 'Apply Now ☕',
-  ctaPrimaryUrl: '/admissions/apply',
+  ctaPrimaryUrl: '/contact',
   ctaSecondary: 'View Course',
   ctaSecondaryUrl: '/courses',
   desktopImageUrl: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=85',
@@ -39,7 +39,7 @@ export default function HeroSection({ data }: { data: HeroData }) {
   const h = { ...FALLBACK, ...data }
 
   return (
-    <section className="relative min-h-screen flex flex-col overflow-hidden">
+    <section className="relative min-h-half flex flex-col overflow-hidden">
       {/* Background image — art direction: different images desktop vs mobile */}
       <div className="absolute inset-0 z-0">
         {/* Desktop image */}
@@ -80,8 +80,8 @@ export default function HeroSection({ data }: { data: HeroData }) {
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex items-center">
-        <div className="container-main pt-40 pb-20">
-          <div className="max-w-3xl">
+        <div className="container-main pt-10 pb-20">
+          <div className="max-w-6xl">
             {/* Badge */}
             {h.badge && (
               <div className="inline-flex items-center gap-2 bg-espresso-500/20 border border-espresso-400/40 text-espresso-300 text-xs font-semibold tracking-[0.2em] uppercase px-4 py-2 rounded-full mb-8 backdrop-blur-sm animate-fade-up">

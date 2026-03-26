@@ -17,7 +17,7 @@ export default async function AnnouncementBar() {
     announcement = {
       message: '🎓 January 2025 intake now open — Limited seats available!',
       ctaLabel: 'Apply Now',
-      ctaUrl: '/admissions/apply',
+      ctaUrl: '/contact',
       bgColor: '#c8860a',
       textColor: '#ffffff',
     }

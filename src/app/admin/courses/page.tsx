@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { Plus, Pencil, Trash2, Eye, EyeOff, Star } from 'lucide-react'
+import ImageUploadField from '@/components/admin/ImageUploadField'
 
 type Course = {
   id: string; title: string; slug: string; level: string; duration: string;
@@ -28,6 +29,7 @@ const levelColors: Record<string,string> = {
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([])
+  const [categories, setCategories] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState<Course | null>(null)
@@ -50,7 +52,15 @@ export default function CoursesPage() {
     setLoading(false)
   }
 
-  useEffect(() => { fetch_() }, [])
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch('/api/admin/course-categories')
+      const data = await res.json()
+      setCategories(Array.isArray(data) ? data : [])
+    } catch { setCategories([]) }
+  }
+
+  useEffect(() => { fetch_(); fetchCategories() }, [])
 
   const openEdit = (c: Course) => {
     setEditing(c)
@@ -59,6 +69,10 @@ export default function CoursesPage() {
   }
 
   const handleSave = async () => {
+    if (!form.categoryId) {
+      alert('Please select a category')
+      return
+    }
     const payload = {
       ...form,
       localFee: form.localFee ? parseFloat(form.localFee) : null,
@@ -192,6 +206,13 @@ export default function CoursesPage() {
                     {LEVELS.map(l => <option key={l} value={l}>{levelLabels[l]}</option>)}
                   </select>
                 </div>
+                <div>
+                  <label className="form-label">Category *</label>
+                  <select value={form.categoryId} onChange={F('categoryId')} className="form-input">
+                    <option value="">Select a category</option>
+                    {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                  </select>
+                </div>
                 <div className="col-span-2">
                   <label className="form-label">Tagline</label>
                   <input value={form.tagline} onChange={F('tagline')} className="form-input" placeholder="Short compelling description" />
@@ -222,24 +243,26 @@ export default function CoursesPage() {
               <div className="pt-4 border-t border-gray-100">
                 <h3 className="font-semibold text-gray-800 mb-4">Course Images</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="form-label text-xs">Thumbnail Desktop <span className="text-gray-400">(800×533px landscape)</span></label>
-                    <input value={form.thumbnailDesktop} onChange={F('thumbnailDesktop')} className="form-input" placeholder="https://..." />
-                    {form.thumbnailDesktop && <img src={form.thumbnailDesktop} className="mt-2 h-20 w-full object-cover rounded-lg" alt="" />}
-                  </div>
-                  <div>
-                    <label className="form-label text-xs">Thumbnail Mobile <span className="text-gray-400">(400×533px portrait)</span></label>
-                    <input value={form.thumbnailMobile} onChange={F('thumbnailMobile')} className="form-input" placeholder="https://..." />
-                    {form.thumbnailMobile && <img src={form.thumbnailMobile} className="mt-2 h-20 w-32 object-cover rounded-lg" alt="" />}
-                  </div>
-                  <div>
-                    <label className="form-label text-xs">Banner Desktop <span className="text-gray-400">(1440×480px)</span></label>
-                    <input value={form.bannerDesktop} onChange={F('bannerDesktop')} className="form-input" placeholder="https://..." />
-                  </div>
-                  <div>
-                    <label className="form-label text-xs">Banner Mobile <span className="text-gray-400">(768×400px)</span></label>
-                    <input value={form.bannerMobile} onChange={F('bannerMobile')} className="form-input" placeholder="https://..." />
-                  </div>
+                  <ImageUploadField
+                    label="Thumbnail Desktop (800×533px landscape)"
+                    value={form.thumbnailDesktop}
+                    onChange={(url) => setForm(f => ({ ...f, thumbnailDesktop: url }))}
+                  />
+                  <ImageUploadField
+                    label="Thumbnail Mobile (400×533px portrait)"
+                    value={form.thumbnailMobile}
+                    onChange={(url) => setForm(f => ({ ...f, thumbnailMobile: url }))}
+                  />
+                  <ImageUploadField
+                    label="Banner Desktop (1440×480px)"
+                    value={form.bannerDesktop}
+                    onChange={(url) => setForm(f => ({ ...f, bannerDesktop: url }))}
+                  />
+                  <ImageUploadField
+                    label="Banner Mobile (768×400px)"
+                    value={form.bannerMobile}
+                    onChange={(url) => setForm(f => ({ ...f, bannerMobile: url }))}
+                  />
                 </div>
               </div>
 

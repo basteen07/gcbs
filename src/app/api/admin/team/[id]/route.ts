@@ -1,9 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { requireAdminSession } from '@/lib/auth'
+import { handlePrismaError } from '@/lib/validation'
 
 export async function GET(_: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  return NextResponse.json({ error: 'Not found' }, { status: 404 })
+  try {
+    await requireAdminSession()
+    const { id } = await params
+    const item = await prisma.teamMember.findUnique({ where: { id } })
+    if (!item) return NextResponse.json({ error: 'Team member not found' }, { status: 404 })
+    return NextResponse.json(item)
+  } catch (err: any) {
+    const { status, error, details } = handlePrismaError(err)
+    return NextResponse.json({ error, details }, { status })
+  }
 }
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -13,7 +23,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     const data = await req.json()
     const item = await prisma.teamMember.update({ where: { id }, data })
     return NextResponse.json(item)
-  } catch { return NextResponse.json({ error: 'Server error' }, { status: 500 }) }
+  } catch (err: any) {
+    const { status, error, details } = handlePrismaError(err)
+    return NextResponse.json({ error, details }, { status })
+  }
 }
 
 export async function DELETE(_: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -22,5 +35,9 @@ export async function DELETE(_: NextRequest, { params }: { params: Promise<{ id:
     const { id } = await params
     await prisma.teamMember.delete({ where: { id } })
     return NextResponse.json({ success: true })
-  } catch { return NextResponse.json({ error: 'Server error' }, { status: 500 }) }
+  } catch (err: any) {
+    const { status, error, details } = handlePrismaError(err)
+    return NextResponse.json({ error, details }, { status })
+  }
 }
+
