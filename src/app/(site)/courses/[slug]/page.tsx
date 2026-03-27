@@ -6,6 +6,7 @@ import { Clock, Award, Globe, CheckCircle2, ChevronRight } from 'lucide-react'
 import type { Metadata } from 'next'
 
 type Props = { params: Promise<{ slug: string }> }
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
@@ -22,13 +23,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function CourseDetailPage({ params }: Props) {
   const { slug } = await params
   let course: any
+  let intakeDates = ''
   try {
-    course = await prisma.course.findUnique({
-      where: { slug, isActive: true },
-      include: { category: true },
-    })
+    const [courseRecord, intakeSetting] = await prisma.$transaction([
+      prisma.course.findUnique({
+        where: { slug, isActive: true },
+        include: { category: true },
+      }),
+      prisma.siteSetting.findUnique({ where: { key: 'school_intake_dates' } }),
+    ])
+
+    course = courseRecord
+    intakeDates = intakeSetting?.value || ''
   } catch {
-    // fallback sample
     course = null
   }
 
@@ -46,13 +53,15 @@ export default async function CourseDetailPage({ params }: Props) {
           {course.bannerMobile && (
             <Image src={course.bannerMobile} alt={course.title} fill className="object-cover sm:hidden opacity-25" sizes="768px" />
           )}
-          <Image
-            src={course.bannerDesktop || course.thumbnailDesktop || 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1920&q=80'}
-            alt={course.title}
-            fill
-            className={`object-cover ${course.bannerMobile ? 'hidden sm:block' : ''} opacity-25`}
-            sizes="100vw"
-          />
+          {(course.bannerDesktop || course.thumbnailDesktop) && (
+            <Image
+              src={course.bannerDesktop || course.thumbnailDesktop}
+              alt={course.title}
+              fill
+              className={`object-cover ${course.bannerMobile ? 'hidden sm:block' : ''} opacity-25`}
+              sizes="100vw"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-r from-coffee-950 via-coffee-950/80 to-transparent" />
         </div>
         <div className="container-main relative z-10">
@@ -185,10 +194,12 @@ export default async function CourseDetailPage({ params }: Props) {
                   <Link href="/contact" className="btn-secondary w-full justify-center">Download Brochure</Link>
                 </div>
 
-                <div className="mt-6 bg-espresso-50 rounded-xl p-4 text-xs text-espresso-700">
-                  <div className="font-semibold mb-1">Next Intake</div>
-                  <div>January 2025 & July 2025</div>
-                </div>
+                {intakeDates && (
+                  <div className="mt-6 bg-espresso-50 rounded-xl p-4 text-xs text-espresso-700">
+                    <div className="font-semibold mb-1">Next Intake</div>
+                    <div>{intakeDates}</div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

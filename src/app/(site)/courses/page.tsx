@@ -5,22 +5,7 @@ import { Clock, Award, ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Programmes & Courses' }
-
-async function getCourses() {
-  try {
-    return await prisma.course.findMany({
-      where: { isActive: true },
-      include: { category: true },
-      orderBy: [{ sortOrder: 'asc' }, { title: 'asc' }],
-    })
-  } catch { return [] }
-}
-
-async function getHero() {
-  try {
-    return await prisma.heroSection.findUnique({ where: { page: 'courses' } })
-  } catch { return null }
-}
+export const dynamic = 'force-dynamic'
 
 const levelLabels: Record<string,string> = {
   CERTIFICATE: 'Certificate', DIPLOMA: 'Diploma',
@@ -29,7 +14,14 @@ const levelLabels: Record<string,string> = {
 }
 
 export default async function CoursesPage() {
-  const [courses, hero] = await Promise.all([getCourses(), getHero()])
+  const [courses, hero] = await prisma.$transaction([
+    prisma.course.findMany({
+      where: { isActive: true },
+      include: { category: true },
+      orderBy: [{ sortOrder: 'asc' }, { title: 'asc' }],
+    }),
+    prisma.heroSection.findUnique({ where: { page: 'courses' } }),
+  ])
 
   return (
     <>
@@ -42,18 +34,13 @@ export default async function CoursesPage() {
           {hero?.mobileImageUrl && (
             <Image src={hero.mobileImageUrl} alt="" fill className="object-cover sm:hidden opacity-20" sizes="768px" />
           )}
-          {!hero?.desktopImageUrl && (
-            <Image src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=80" alt="" fill className="object-cover opacity-20" sizes="100vw" />
-          )}
         </div>
         <div className="container-main relative z-10 text-center">
           <span className="section-label text-espresso-400">Our Programmes</span>
           <h1 className="text-5xl md:text-6xl font-bold text-white mt-2" style={{ fontFamily: 'var(--font-playfair)' }}>
-            {hero?.headline || 'Courses & Programmes'}
+            {hero?.headline || 'Programmes'}
           </h1>
-          <p className="text-coffee-300 mt-4 max-w-xl mx-auto">
-            {hero?.bodyText || 'Industry-aligned diplomas and certificates designed for aspiring café professionals.'}
-          </p>
+          {hero?.bodyText && <p className="text-coffee-300 mt-4 max-w-xl mx-auto">{hero.bodyText}</p>}
         </div>
       </section>
 
@@ -77,13 +64,15 @@ export default async function CoursesPage() {
                         sizes="100vw"
                       />
                     )}
-                    <Image
-                      src={course.thumbnailDesktop || 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=80'}
-                      alt={course.title}
-                      fill
-                      className={`object-cover ${course.thumbnailMobile ? 'hidden sm:block' : ''} group-hover:scale-105 transition-transform duration-500`}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
+                    {course.thumbnailDesktop && (
+                      <Image
+                        src={course.thumbnailDesktop}
+                        alt={course.title}
+                        fill
+                        className={`object-cover ${course.thumbnailMobile ? 'hidden sm:block' : ''} group-hover:scale-105 transition-transform duration-500`}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                     <div className="absolute top-4 left-4">
                       <span className="text-xs font-bold px-3 py-1 rounded-full bg-white/90 text-coffee-800">

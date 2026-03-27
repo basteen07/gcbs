@@ -11,38 +11,7 @@ type Testimonial = {
   photoDesktop?: string | null
 }
 
-const FALLBACK: Testimonial[] = [
-  {
-    id: '1', name: 'Sarah Chen', role: 'Café Owner, Singapore', courseTitle: 'Diploma in Café Management',
-    quote: 'GCBS gave me the complete package — from espresso extraction science to P&L management. I opened my own café 6 months after graduating and we\'re already turning a profit!',
-    rating: 5, photoDesktop: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80',
-  },
-  {
-    id: '2', name: 'Marcus Tan', role: 'Head Barista, The Coffee Bean', courseTitle: 'Barista Certification',
-    quote: 'The hands-on training at GCBS is unmatched. Our instructors are actual competitors and café owners. I landed my dream job before I even graduated.',
-    rating: 5, photoDesktop: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80',
-  },
-  {
-    id: '3', name: 'Priya Nair', role: 'F&B Manager, Marriott Hotels', courseTitle: 'Advanced Café Operations',
-    quote: 'The curriculum is incredibly practical. Every module had real-world projects. My employer noticed the difference immediately — I was promoted within my first year.',
-    rating: 5, photoDesktop: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&q=80',
-  },
-  {
-    id: '4', name: 'James Lim', role: 'Coffee Entrepreneur', courseTitle: 'Postgraduate Diploma',
-    quote: 'I came in knowing nothing about coffee. GCBS transformed me into a confident café owner. The business modules alone are worth the entire programme.',
-    rating: 5, photoDesktop: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80',
-  },
-  {
-    id: '5', name: 'Aisha Mohammed', role: 'Barista Trainer, TWG Tea', courseTitle: 'Barista Certification',
-    quote: 'The SCA certification I earned through GCBS opened doors I never expected. I now train baristas across Southeast Asia.',
-    rating: 5, photoDesktop: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80',
-  },
-  {
-    id: '6', name: 'Wei Hao', role: 'Café Chain Director', courseTitle: 'Diploma in Café Management',
-    quote: 'GCBS understands what the industry needs. Every lecturer brought fresh real-world experience. The network I built at GCBS is still invaluable to my business today.',
-    rating: 5, photoDesktop: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80',
-  },
-]
+
 
 function Stars({ rating }: { rating: number }) {
   return (
@@ -55,7 +24,8 @@ function Stars({ rating }: { rating: number }) {
 }
 
 export default function TestimonialsSection({ testimonials }: { testimonials?: Testimonial[] }) {
-  const items = testimonials?.length ? testimonials : FALLBACK
+  const items = testimonials || []
+  if (items.length === 0) return null
 
   return (
     <section className="section-padding bg-cream-100 relative overflow-hidden">

@@ -9,34 +9,54 @@ import PartnersSection from '@/components/sections/PartnersSection'
 import BannerStrip from '@/components/sections/BannerStrip'
 import GalleryPreview from '@/components/sections/GalleryPreview'
 
+export const dynamic = 'force-dynamic'
+
 async function getHomeData() {
-  const [hero, stats, courses, testimonials, partners, banner] = await Promise.all([
-    prisma.heroSection.findUnique({ where: { page: 'home' } }),
-    prisma.stat.findMany({ where: { isActive: true }, orderBy: { sortOrder: 'asc' } }),
-    prisma.course.findMany({
-      where: { isActive: true },
-      include: { category: true },
-      orderBy: { sortOrder: 'asc' },
-      take: 6,
-    }),
-    prisma.testimonial.findMany({
-      where: { isActive: true, isFeatured: true },
-      orderBy: { sortOrder: 'asc' },
-      take: 6,
-    }),
-    prisma.partner.findMany({
-      where: { isActive: true },
-      orderBy: { sortOrder: 'asc' },
-    }),
-    prisma.banner.findFirst({
-      where: { isActive: true, placement: 'HOME_MID' },
-    }),
-  ])
-  return { hero, stats, courses, testimonials, partners, banner }
+  try {
+    const [hero, stats, courses, testimonials, partners, banner, gallery] = await prisma.$transaction([
+      prisma.heroSection.findUnique({ where: { page: 'home' } }),
+      prisma.stat.findMany({ where: { isActive: true }, orderBy: { sortOrder: 'asc' } }),
+      prisma.course.findMany({
+        where: { isActive: true },
+        include: { category: true },
+        orderBy: { sortOrder: 'asc' },
+        take: 6,
+      }),
+      prisma.testimonial.findMany({
+        where: { isActive: true, isFeatured: true },
+        orderBy: { sortOrder: 'asc' },
+        take: 6,
+      }),
+      prisma.partner.findMany({
+        where: { isActive: true },
+        orderBy: { sortOrder: 'asc' },
+      }),
+      prisma.banner.findFirst({
+        where: { isActive: true, placement: 'HOME_MID' },
+      }),
+      prisma.galleryImage.findMany({
+        where: { isActive: true },
+        orderBy: { sortOrder: 'asc' },
+        take: 5,
+      }),
+    ])
+
+    return { hero, stats, courses, testimonials, partners, banner, gallery }
+  } catch {
+    return {
+      hero: null,
+      stats: [],
+      courses: [],
+      testimonials: [],
+      partners: [],
+      banner: null,
+      gallery: [],
+    }
+  }
 }
 
 export default async function HomePage() {
-  const { hero, stats, courses, testimonials, partners, banner } = await getHomeData()
+  const { hero, stats, courses, testimonials, partners, banner, gallery } = await getHomeData()
 
   return (
     <>
@@ -46,7 +66,7 @@ export default async function HomePage() {
       <WhyUsSection />
       {banner && <BannerStrip banner={banner} />}
       <TestimonialsSection testimonials={testimonials} />
-      <GalleryPreview />
+      <GalleryPreview images={gallery} />
       <PartnersSection partners={partners} />
       <CtaSection />
     </>

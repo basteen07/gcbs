@@ -5,10 +5,11 @@ import { CheckCircle2 } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'About Us' }
+export const dynamic = 'force-dynamic'
 
 async function getData() {
   try {
-    const [hero, team] = await Promise.all([
+    const [hero, team] = await prisma.$transaction([
       prisma.heroSection.findUnique({ where: { page: 'about' } }),
       prisma.teamMember.findMany({ where: { isActive: true }, orderBy: { sortOrder: 'asc' } }),
     ])
@@ -34,13 +35,15 @@ export default async function AboutPage() {
           {hero?.mobileImageUrl && (
             <Image src={hero.mobileImageUrl} alt="" fill className="object-cover sm:hidden opacity-20" sizes="768px" />
           )}
-          <Image
-            src={hero?.desktopImageUrl || 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1920&q=80'}
-            alt=""
-            fill
-            className={`object-cover ${hero?.mobileImageUrl ? 'hidden sm:block' : ''} opacity-20`}
-            sizes="100vw"
-          />
+          {hero?.desktopImageUrl && (
+            <Image
+              src={hero.desktopImageUrl}
+              alt=""
+              fill
+              className={`object-cover ${hero?.mobileImageUrl ? 'hidden sm:block' : ''} opacity-20`}
+              sizes="100vw"
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-coffee-950/90 to-coffee-950/60" />
         </div>
         <div className="container-main relative z-10 text-center">
@@ -138,13 +141,15 @@ export default async function AboutPage() {
                     {member.photoMobile && (
                       <Image src={member.photoMobile} alt={member.name} fill className="object-cover sm:hidden" sizes="128px" />
                     )}
-                    <Image
-                      src={member.photoDesktop || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80'}
-                      alt={member.name}
-                      fill
-                      className={`object-cover ${member.photoMobile ? 'hidden sm:block' : ''}`}
-                      sizes="128px"
-                    />
+                    {member.photoDesktop && (
+                      <Image
+                        src={member.photoDesktop}
+                        alt={member.name}
+                        fill
+                        className={`object-cover ${member.photoMobile ? 'hidden sm:block' : ''}`}
+                        sizes="128px"
+                      />
+                    )}
                   </div>
                   <h3 className="font-bold text-coffee-950" style={{ fontFamily: 'var(--font-playfair)' }}>{member.name}</h3>
                   <p className="text-sm text-espresso-500 font-medium mt-0.5">{member.title}</p>

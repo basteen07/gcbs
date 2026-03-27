@@ -1,14 +1,8 @@
 type Stat = { id: string; label: string; value: string; icon?: string | null }
 
-const FALLBACK_STATS: Stat[] = [
-  { id: '1', value: '500+', label: 'Graduates Placed', icon: '🎓' },
-  { id: '2', value: '15+', label: 'Years of Excellence', icon: '⭐' },
-  { id: '3', value: '98%', label: 'Employment Rate', icon: '💼' },
-  { id: '4', value: '30+', label: 'Industry Partners', icon: '🤝' },
-]
-
 export default function StatsSection({ stats }: { stats?: Stat[] }) {
-  const items = stats?.length ? stats : FALLBACK_STATS
+  const items = stats || []
+  if (items.length === 0) return null
 
   return (
     <section id="stats" className="bg-white py-16 relative overflow-hidden text-coffee-900">

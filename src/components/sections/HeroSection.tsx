@@ -18,55 +18,43 @@ type HeroData = {
   overlayColor?: string
 } | null
 
-const FALLBACK = {
-  badge: '☕ Professional Training Institute',
-  headline: 'Professional',
-  headlineAccent: 'DIPLOMA IN CAFÉ MANAGEMENT',
-  subheadline: '& Barista Skills',
-  bodyText:
-    'Learn the art and science of coffee from industry professionals. Our hands-on training prepares students for careers in cafés, restaurants, hotels, and coffee businesses.',
-  ctaPrimary: 'Apply Now ☕',
-  ctaPrimaryUrl: '/contact',
-  ctaSecondary: 'View Course',
-  ctaSecondaryUrl: '/courses',
-  desktopImageUrl: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=85',
-  mobileImageUrl: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=768&q=85',
-  overlayOpacity: 0.65,
-  overlayColor: '#1a0d08',
-}
-
 export default function HeroSection({ data }: { data: HeroData }) {
-  const h = { ...FALLBACK, ...data }
+  const h = data
+  if (!h) return null
 
   return (
     <section className="relative min-h-half flex flex-col overflow-hidden">
       {/* Background image — art direction: different images desktop vs mobile */}
       <div className="absolute inset-0 z-0">
         {/* Desktop image */}
-        <Image
-          src={h.desktopImageUrl || FALLBACK.desktopImageUrl}
-          alt="Barista crafting coffee"
-          fill
-          priority
-          quality={90}
-          className="object-cover hidden sm:block"
-          sizes="100vw"
-        />
+        {h.desktopImageUrl && (
+          <Image
+            src={h.desktopImageUrl}
+            alt="Barista crafting coffee"
+            fill
+            priority
+            quality={90}
+            className="object-cover hidden sm:block"
+            sizes="100vw"
+          />
+        )}
         {/* Mobile image */}
-        <Image
-          src={h.mobileImageUrl || FALLBACK.mobileImageUrl}
-          alt="Barista crafting coffee"
-          fill
-          priority
-          quality={85}
-          className="object-cover sm:hidden"
-          sizes="768px"
-        />
+        {h.mobileImageUrl && (
+          <Image
+            src={h.mobileImageUrl}
+            alt="Barista crafting coffee"
+            fill
+            priority
+            quality={85}
+            className="object-cover sm:hidden"
+            sizes="768px"
+          />
+        )}
         {/* Overlay */}
         <div
           className="absolute inset-0"
           style={{
-            background: `linear-gradient(135deg, ${h.overlayColor}f0 0%, ${h.overlayColor}a0 60%, ${h.overlayColor}50 100%)`,
+            background: `linear-gradient(135deg, ${(h.overlayColor || '#1a0d08')}f0 0%, ${(h.overlayColor || '#1a0d08')}a0 60%, ${(h.overlayColor || '#1a0d08')}50 100%)`,
           }}
         />
         {/* Bottom gradient */}
@@ -141,27 +129,6 @@ export default function HeroSection({ data }: { data: HeroData }) {
                 </Link>
               )}
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Quick info strip */}
-      <div className="relative z-10 border-t border-white/10 backdrop-blur-md bg-black/20">
-        <div className="container-main py-5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[
-              { label: 'Intake', value: 'Jan & Jul 2025' },
-              { label: 'Duration', value: '12 Months' },
-              { label: 'Mode', value: 'Full-time' },
-              { label: 'Certification', value: 'EduTrust Approved' },
-            ].map((item) => (
-              <div key={item.label}>
-                <div className="text-espresso-400 text-xs font-semibold uppercase tracking-widest mb-1">
-                  {item.label}
-                </div>
-                <div className="text-white text-sm font-semibold">{item.value}</div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

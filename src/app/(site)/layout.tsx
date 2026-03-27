@@ -3,6 +3,8 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import AnnouncementBar from '@/components/layout/AnnouncementBar'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Global Café Business School',
 }
