@@ -1,37 +1,40 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Mail, Phone, MapPin, Facebook, Instagram, Youtube, Linkedin } from 'lucide-react'
-import { prisma } from '@/lib/prisma'
+import logo from '../../logo.jpeg'
 
-export default async function Footer() {
-  const settingKeys = [
-    'contact_phone',
-    'contact_email',
-    'contact_address',
-    'contact_hours',
-    'social_facebook',
-    'social_instagram',
-    'social_youtube',
-    'social_linkedin',
-    'school_edutrust_no',
-    'school_reg_no',
-  ]
+type SiteSettings = Record<string, string>
 
-  const settingsRows = await prisma.siteSetting.findMany({
-    where: { key: { in: settingKeys } },
-  })
+export default function Footer() {
+  const [settings, setSettings] = useState<SiteSettings>({})
 
-  const settings = settingsRows.reduce<Record<string, string>>((acc, row) => {
-    acc[row.key] = row.value
-    return acc
-  }, {})
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await fetch('/api/public/settings')
+        const data = await res.json()
+        if (data && typeof data === 'object' && !Array.isArray(data)) {
+          setSettings(data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch footer settings:', error)
+      }
+    }
 
-  const phoneText = settings.contact_phone || '+65 0000 0000'
-  const phoneHref = `tel:${phoneText.replace(/[^\d+]/g, '')}`
-  const emailText = settings.contact_email || 'enquiry@gcbs.edu.sg'
-  const addressText = settings.contact_address || '123 Orchard Road, Singapore 238858'
-  const hoursText = settings.contact_hours || 'Mon-Fri 9am-6pm'
-  const regNo = settings.school_reg_no || '202000001X'
-  const eduTrustNo = settings.school_edutrust_no || 'EduTrust Certified'
+    fetchSettings()
+  }, [])
+
+  const phoneText = settings.contact_phone || ''
+  const phoneHref = phoneText ? `tel:${phoneText.replace(/[^\d+]/g, '')}` : '#'
+  const emailText = settings.contact_email || ''
+  const emailHref = emailText ? `mailto:${emailText}` : '#'
+  const addressText = settings.contact_address || ''
+  const hoursText = settings.contact_hours || ''
+  const regNo = settings.school_reg_no || ''
+  const eduTrustNo = settings.school_edutrust_no || ''
 
   return (
     <footer className="bg-coffee-950 text-coffee-200">
@@ -47,9 +50,13 @@ export default async function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-full bg-espresso-500 flex items-center justify-center text-white text-xl font-bold">
-                ☕
-              </div>
+              <Image
+                src={logo}
+                alt="Global Café Business School Logo"
+                width={56}
+                height={60}
+                className="object-contain"
+              />
               <div>
                 <div className="text-lg font-bold text-white" style={{ fontFamily: 'var(--font-playfair)' }}>
                   Global Café
@@ -128,28 +135,28 @@ export default async function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm text-coffee-400">
                 <MapPin size={16} className="text-espresso-400 mt-0.5 shrink-0" />
-                {addressText}
+                {addressText || '—'}
               </li>
               <li>
                 <Link href={phoneHref} className="flex items-center gap-3 text-sm text-coffee-400 hover:text-espresso-400 transition-colors">
                   <Phone size={16} className="text-espresso-400 shrink-0" />
-                  {phoneText}
+                  {phoneText || '—'}
                 </Link>
               </li>
               <li>
-                <Link href={`mailto:${emailText}`} className="flex items-center gap-3 text-sm text-coffee-400 hover:text-espresso-400 transition-colors">
+                <Link href={emailHref} className="flex items-center gap-3 text-sm text-coffee-400 hover:text-espresso-400 transition-colors">
                   <Mail size={16} className="text-espresso-400 shrink-0" />
-                  {emailText}
+                  {emailText || '—'}
                 </Link>
               </li>
             </ul>
 
-            <p className="text-xs text-coffee-500 mt-3">{hoursText}</p>
+            {hoursText && <p className="text-xs text-coffee-500 mt-3">{hoursText}</p>}
 
             <div className="mt-8 p-4 rounded-xl bg-coffee-900 border border-coffee-800">
               <div className="text-xs text-coffee-500 uppercase tracking-widest mb-1">Accreditation</div>
-              <div className="text-sm text-coffee-300 font-medium">{eduTrustNo}</div>
-              <div className="text-xs text-coffee-500 mt-0.5">PEI Reg. No.: {regNo}</div>
+              <div className="text-sm text-coffee-300 font-medium">{eduTrustNo || '—'}</div>
+              <div className="text-xs text-coffee-500 mt-0.5">PEI Reg. No.: {regNo || '—'}</div>
             </div>
           </div>
         </div>

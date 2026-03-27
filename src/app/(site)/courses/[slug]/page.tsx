@@ -1,45 +1,69 @@
 import { prisma } from '@/lib/prisma'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { Clock, Award, Globe, CheckCircle2, ChevronRight } from 'lucide-react'
 import type { Metadata } from 'next'
 
 type Props = { params: Promise<{ slug: string }> }
 export const dynamic = 'force-dynamic'
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params
-  try {
-    const course = await prisma.course.findUnique({ where: { slug } })
-    if (!course) return { title: 'Course Not Found' }
-    return {
-      title: course.metaTitle || course.title,
-      description: course.metaDescription || course.tagline || undefined,
-    }
-  } catch { return { title: 'Course' } }
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: 'Programme' }
+}
+
+function normalizeSlug(value: string) {
+  return value
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
 }
 
 export default async function CourseDetailPage({ params }: Props) {
-  const { slug } = await params
+  const { slug: rawSlug } = await params
+  const requestedSlug = decodeURIComponent(rawSlug)
+  const normalizedRequestedSlug = normalizeSlug(requestedSlug)
+
   let course: any
   let intakeDates = ''
+
   try {
-    const [courseRecord, intakeSetting] = await prisma.$transaction([
-      prisma.course.findUnique({
-        where: { slug, isActive: true },
+    const [directCourse, intakeSetting] = await prisma.$transaction([
+      prisma.course.findFirst({
+        where: { slug: { equals: requestedSlug, mode: 'insensitive' }, isActive: true },
         include: { category: true },
       }),
       prisma.siteSetting.findUnique({ where: { key: 'school_intake_dates' } }),
     ])
 
-    course = courseRecord
+    course = directCourse
     intakeDates = intakeSetting?.value || ''
+
+    if (!course) {
+      const candidates = await prisma.course.findMany({
+        where: { isActive: true },
+        select: { id: true, slug: true },
+      })
+
+      const matched = candidates.find((c) => normalizeSlug(c.slug) === normalizedRequestedSlug)
+      if (matched) {
+        course = await prisma.course.findUnique({
+          where: { id: matched.id },
+          include: { category: true },
+        })
+      }
+    }
   } catch {
     course = null
   }
 
   if (!course) notFound()
+
+  if (requestedSlug !== course.slug) {
+    redirect(`/courses/${encodeURIComponent(course.slug)}`)
+  }
 
   const outcomes: string[] = Array.isArray(course.outcomes) ? course.outcomes : []
   const curriculum: { module: string; topics: string[] }[] = Array.isArray(course.curriculum) ? course.curriculum : []

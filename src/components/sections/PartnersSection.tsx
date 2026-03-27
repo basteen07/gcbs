@@ -16,13 +16,13 @@ export function PartnersSection({ partners }: { partners?: Partner[] }) {
         </div>
         <div className="flex flex-wrap items-center justify-center gap-8 md:gap-14">
           {items.map((p) => (
-            <div key={p.id} className="opacity-60 hover:opacity-100 transition-opacity duration-200 grayscale hover:grayscale-0">
+            <div key={p.id} className="transition-transform duration-200 hover:scale-105">
               <Image
                 src={p.logoUrl}
                 alt={p.name}
-                width={140}
-                height={50}
-                className="object-contain h-10 w-auto"
+                width={180}
+                height={64}
+                className="object-contain h-14 w-auto"
                 unoptimized
               />
             </div>
