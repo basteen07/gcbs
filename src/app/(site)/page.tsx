@@ -9,7 +9,7 @@ import PartnersSection from '@/components/sections/PartnersSection'
 import BannerStrip from '@/components/sections/BannerStrip'
 import GalleryPreview from '@/components/sections/GalleryPreview'
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 async function getHomeData() {
   try {

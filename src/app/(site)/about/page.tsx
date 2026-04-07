@@ -5,7 +5,7 @@ import { CheckCircle2 } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'About Us' }
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 async function getData() {
   try {

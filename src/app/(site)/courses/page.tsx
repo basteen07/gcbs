@@ -5,7 +5,7 @@ import { Clock, Award, ArrowRight } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Programmes & Courses' }
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 const levelLabels: Record<string,string> = {
   CERTIFICATE: 'Certificate', DIPLOMA: 'Diploma',

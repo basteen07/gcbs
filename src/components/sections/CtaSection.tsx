@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import Link from 'next/link'
 import { Send, CheckCircle } from 'lucide-react'
 
 const schema = z.object({
@@ -44,8 +45,8 @@ export default function CtaSection() {
     const fetchData = async () => {
       try {
         const [coursesRes, settingsRes] = await Promise.all([
-          fetch('/api/public/courses'),
-          fetch('/api/public/settings'),
+          fetch('/api/public/courses', { cache: 'force-cache' }),
+          fetch('/api/public/settings', { cache: 'force-cache' }),
         ])
 
         const coursesData = await coursesRes.json()
@@ -215,7 +216,7 @@ export default function CtaSection() {
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input type="checkbox" {...register('privacyConsent')} className="mt-0.5 rounded border-coffee-300 text-espresso-500 focus:ring-espresso-400" />
                     <span className="text-xs text-coffee-600">
-                      I agree to the <a href="/privacy" className="text-espresso-600 underline">Privacy Policy</a> and consent to being contacted about my enquiry. *
+                      I agree to the <Link href="/privacy" className="text-espresso-600 underline">Privacy Policy</Link> and consent to being contacted about my enquiry. *
                     </span>
                   </label>
                   {errors.privacyConsent && <p className="form-error">{errors.privacyConsent.message}</p>}

@@ -26,8 +26,8 @@ export default function Navbar() {
     const fetchData = async () => {
       try {
         const [coursesRes, settingsRes] = await Promise.all([
-          fetch('/api/public/courses', { cache: 'no-store' }),
-          fetch('/api/public/settings', { cache: 'no-store' }),
+          fetch('/api/public/courses', { cache: 'force-cache' }),
+          fetch('/api/public/settings', { cache: 'force-cache' }),
         ])
 
         const coursesData = await coursesRes.json()

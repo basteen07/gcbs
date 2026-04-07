@@ -14,7 +14,7 @@ export default function Footer() {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await fetch('/api/public/settings', { cache: 'no-store' })
+        const res = await fetch('/api/public/settings', { cache: 'force-cache' })
         const data = await res.json()
         if (data && typeof data === 'object' && !Array.isArray(data)) {
           setSettings(data)

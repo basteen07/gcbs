@@ -5,11 +5,15 @@ import { verifyPassword, createToken } from '@/lib/auth'
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json()
-    if (!email || !password) {
+    const normalizedEmail = String(email || '').trim().toLowerCase()
+
+    if (!normalizedEmail || !password) {
       return NextResponse.json({ error: 'Email and password required' }, { status: 400 })
     }
 
-    const user = await prisma.adminUser.findUnique({ where: { email } })
+    const user = await prisma.adminUser.findFirst({
+      where: { email: { equals: normalizedEmail, mode: 'insensitive' } },
+    })
     if (!user) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
     }

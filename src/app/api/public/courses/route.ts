@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
+export const revalidate = 120
 
 export async function GET() {
   try {
@@ -13,7 +12,7 @@ export async function GET() {
     })
     return NextResponse.json(courses, {
       headers: {
-        'Cache-Control': 'no-store, max-age=0',
+        'Cache-Control': 'public, max-age=30, s-maxage=120, stale-while-revalidate=300',
       },
     })
   } catch {

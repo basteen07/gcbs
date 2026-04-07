@@ -4,7 +4,7 @@ import { prisma } from '@/lib/prisma'
 import Image from 'next/image'
 
 export const metadata: Metadata = { title: 'Contact & Enquiry' }
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 async function getContactHero() {
   try {

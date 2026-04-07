@@ -5,7 +5,7 @@ import { CheckCircle2, FileText, Mail, Phone } from 'lucide-react'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = { title: 'Admissions' }
-export const dynamic = 'force-dynamic'
+export const revalidate = 60
 
 async function getData() {
   try {
