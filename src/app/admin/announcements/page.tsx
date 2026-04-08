@@ -124,7 +124,7 @@ export default function AnnouncementsPage() {
               </div>
               <div>
                 <label className="form-label">Message *</label>
-                <input value={form.message} onChange={F('message')} className="form-input" placeholder="🎓 January 2025 intake now open — Limited seats!" />
+                <input value={form.message} onChange={F('message')} className="form-input" placeholder="🎓 JULY 2026 intake now open — Limited seats!" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>

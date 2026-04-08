@@ -18,30 +18,13 @@ const features = [
     desc: 'Earn globally recognised certifications from SCA (Specialty Coffee Association) alongside your diploma.',
   },
   {
-    icon: '💼',
+    icon: '&#128488;',
     title: 'Job Placement Support',
     desc: '98% employment rate within 6 months of graduation. Our career services team connects you with top café brands.',
   },
-  {
-    icon: '🏆',
-    title: 'EduTrust Accredited',
-    desc: 'Registered with SkillsFuture Singapore as a Private Education Institution with EduTrust certification.',
-  },
-  {
-    icon: '📅',
-    title: 'Flexible Intake Schedule',
-    desc: 'January and July intakes. Part-time options available for working professionals.',
-  },
 ]
 
-const highlights = [
-  'SCA Certified Training Centre',
-  'Industry-mentorship programme',
-  'Real café project assignments',
-  'Career coaching & placement',
-  'Internship with partner cafés',
-  'Alumni network across 20+ countries',
-]
+const highlights = []
 
 export default function WhyUsSection() {
   return (
@@ -79,8 +62,8 @@ export default function WhyUsSection() {
 
           {/* Right — content */}
           <div>
-            <span className="section-label">Why Choose GCBS</span>
-            <h2 className="section-title mb-6">
+            <span className="section-label text-2xl">Why Choose GCBS</span>
+            <h2 className="section-title text-5xl md:text-6xl mb-6">
               Where <span>Passion</span> Meets<br />Professionalism
             </h2>
             <p className="text-coffee-200 leading-relaxed mb-8 text-lg">
@@ -89,15 +72,15 @@ export default function WhyUsSection() {
               graduates who are truly café-ready from day one.
             </p>
 
-            {/* Highlights */}
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
-              {highlights.map((h) => (
-                <li key={h} className="flex items-center gap-2.5 text-sm text-coffee-100">
-                  <CheckCircle2 size={16} className="text-espresso-500 shrink-0" />
-                  {h}
-                </li>
-              ))}
-            </ul>
+            {/* Partner Logos */}
+            <div className="flex items-center gap-6 mb-10">
+              <div className="text-4xl font-bold text-white bg-espresso-800 px-4 py-2 rounded-lg">
+                Skill India
+              </div>
+              <div className="text-lg font-bold text-white bg-espresso-800 px-4 py-2 rounded-lg">
+                Dr. APJ Abdul Kalam<br/>International Foundation
+              </div>
+            </div>
 
             {/* Feature cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

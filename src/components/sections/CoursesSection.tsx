@@ -51,63 +51,65 @@ export default function CoursesSection({ courses }: { courses?: Course[] }) {
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Grid - Single column centered full width cards */}
+        <div className="max-w-4xl mx-auto space-y-6">
           {items.map((course) => (
-            <article key={course.id} className="group bg-espresso-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-400 card-hover border border-espresso-600">
-              {/* Thumbnail */}
-              <div className="relative h-56 overflow-hidden bg-coffee-200">
-                {course.thumbnailDesktop && (
-                  <Image
-                    src={course.thumbnailDesktop}
-                    alt={course.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                {/* Level badge */}
-                <div className="absolute top-4 left-4">
-                  <span className={`text-xs font-bold px-3 py-1 rounded-full ${levelColors[course.level] || 'bg-espresso-600 text-white'}`}>
-                    {levelLabels[course.level] || course.level}
-                  </span>
-                </div>
-              </div>
-
-              {/* Body */}
-              <div className="p-6">
-                <div className="text-xs text-espresso-500 font-semibold uppercase tracking-widest mb-2">
-                  {course.category.name}
-                </div>
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-coffee-100 transition-colors" style={{ fontFamily: 'var(--font-playfair)' }}>
-                  {course.title}
-                </h3>
-                {course.tagline && (
-                  <p className="text-sm text-coffee-200 leading-relaxed mb-4">{course.tagline}</p>
-                )}
-
-                {/* Meta */}
-                <div className="flex items-center gap-4 text-xs text-coffee-300 mb-5">
-                  <span className="flex items-center gap-1">
-                    <Clock size={13} />
-                    {course.duration}
-                  </span>
-                  {course.localFee && (
-                    <span className="flex items-center gap-1">
-                      <Award size={13} />
-                      {course.currency} {Number(course.localFee).toLocaleString()}
-                    </span>
+            <article key={course.id} className="group bg-espresso-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-400 card-hover border border-espresso-600">
+              <div className="flex flex-col md:flex-row">
+                {/* Thumbnail */}
+                <div className="relative h-64 md:h-auto md:w-72 overflow-hidden bg-coffee-200 shrink-0">
+                  {course.thumbnailDesktop && (
+                    <Image
+                      src={course.thumbnailDesktop}
+                      alt={course.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 300px"
+                    />
                   )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent md:bg-gradient-to-r" />
+                  {/* Level badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className={`text-xs font-bold px-3 py-1 rounded-full ${levelColors[course.level] || 'bg-espresso-600 text-white'}`}>
+                      {levelLabels[course.level] || course.level}
+                    </span>
+                  </div>
                 </div>
 
-                <Link
-                  href={`/courses/${course.slug}`}
-                  className="flex items-center gap-1.5 text-coffee-100 text-sm font-semibold hover:gap-3 transition-all duration-200 group/link"
-                >
-                  Learn More
-                  <ArrowRight size={15} className="group-hover/link:translate-x-1 transition-transform" />
-                </Link>
+                {/* Body */}
+                <div className="p-6 flex-1 flex flex-col justify-center">
+                  <div className="text-xs text-espresso-500 font-semibold uppercase tracking-widest mb-2">
+                    {course.category.name}
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-coffee-100 transition-colors" style={{ fontFamily: 'var(--font-playfair)' }}>
+                    {course.title}
+                  </h3>
+                  {course.tagline && (
+                    <p className="text-sm text-coffee-200 leading-relaxed mb-4">{course.tagline}</p>
+                  )}
+
+                  {/* Meta */}
+                  <div className="flex items-center gap-6 text-sm text-coffee-300 mb-5">
+                    <span className="flex items-center gap-2">
+                      <Clock size={16} />
+                      {course.duration}
+                    </span>
+                    {course.localFee && (
+                      <span className="flex items-center gap-2">
+                        <Award size={16} />
+                        {course.currency} {Number(course.localFee).toLocaleString()}
+                      </span>
+                    )}
+                  </div>
+
+                  <Link
+                    href={`/courses/${course.slug}`}
+                    className="inline-flex items-center gap-2 text-coffee-100 text-sm font-semibold hover:gap-3 transition-all duration-200 group/link self-start"
+                  >
+                    Learn More
+                    <ArrowRight size={16} className="group-hover/link:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
               </div>
             </article>
           ))}

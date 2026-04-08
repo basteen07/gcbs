@@ -15,7 +15,7 @@ export default async function AnnouncementBar() {
   } catch {
     // Fallback when DB not ready
     announcement = {
-      message: '🎓 January 2025 intake now open — Limited seats available!',
+      message: '🎓 JULY 2026 intake now open — Limited seats available!',
       ctaLabel: 'Apply Now',
       ctaUrl: '/contact',
       bgColor: '#c8860a',

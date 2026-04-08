@@ -12,42 +12,25 @@ type Course = {
   slug: string
 }
 
-type SiteSettings = {
-  contact_phone?: string
-}
-
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [courses, setCourses] = useState<Course[]>([])
-  const [settings, setSettings] = useState<SiteSettings>({})
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCourses = async () => {
       try {
-        const [coursesRes, settingsRes] = await Promise.all([
-          fetch('/api/public/courses', { cache: 'force-cache' }),
-          fetch('/api/public/settings', { cache: 'force-cache' }),
-        ])
-
-        const coursesData = await coursesRes.json()
-        if (Array.isArray(coursesData)) {
-          setCourses(coursesData.map(c => ({ id: c.id, title: c.title, slug: c.slug })))
-        }
-
-        const settingsData = await settingsRes.json()
-        if (settingsData && typeof settingsData === 'object' && !Array.isArray(settingsData)) {
-          setSettings(settingsData)
+        const res = await fetch('/api/public/courses', { cache: 'force-cache' })
+        const data = await res.json()
+        if (Array.isArray(data)) {
+          setCourses(data.map(c => ({ id: c.id, title: c.title, slug: c.slug })))
         }
       } catch (error) {
-        console.error('Failed to fetch navbar data:', error)
+        console.error('Failed to fetch courses:', error)
       }
     }
-    fetchData()
+    fetchCourses()
   }, [])
-
-  const phoneText = settings.contact_phone || '+65 0000 0000'
-  const phoneHref = `tel:${phoneText.replace(/[^\d+]/g, '')}`
 
   const navLinks = [
     { label: 'About', href: '/about' },
@@ -67,14 +50,14 @@ export default function Navbar() {
       className="sticky top-0 left-0 right-0 z-50 bg-espresso-900 border-b border-espresso-700 shadow-lg transition-all duration-300"
     >
       <div className="container-main">
-        <nav className="flex items-center justify-between h-20">
+        <nav className="flex items-center justify-between h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
             <Image
               src={logo}
               alt="Global Café Business School Logo"
-              width={80}
-              height={85}
+              width={100}
+              height={110}
               className="group-hover:scale-100 transition-transform"
             />
             <div>
@@ -138,11 +121,11 @@ export default function Navbar() {
 
           {/* CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <Link href={phoneHref} className="flex items-center gap-1.5 text-sm text-coffee-200 hover:text-white transition-colors">
+            <Link href="tel:9894843822" className="flex items-center gap-1.5 text-sm text-coffee-200 hover:text-white transition-colors">
               <Phone size={14} />
-              {phoneText}
+              9894843822
             </Link>
-            <Link href="/contact" className="btn-primary text-sm py-3 px-6">
+            <Link href="/admission" className="btn-primary text-sm py-3 px-6">
               Apply Now
             </Link>
           </div>
@@ -195,12 +178,12 @@ export default function Navbar() {
               </div>
             ))}
             <div className="pt-4 border-t border-espresso-700 space-y-3">
-              <Link href={phoneHref} className="flex items-center gap-2 py-3 px-4 text-coffee-200 text-sm">
+              <Link href="tel:9894843822" className="flex items-center gap-2 py-3 px-4 text-coffee-200 text-sm">
                 <Phone size={14} />
-                {phoneText}
+                9894843822
               </Link>
               <Link
-                href="/contact"
+                href="/admission"
                 className="btn-primary w-full justify-center"
                 onClick={() => setOpen(false)}
               >

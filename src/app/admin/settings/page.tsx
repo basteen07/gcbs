@@ -43,7 +43,7 @@ const SETTING_GROUPS = [
       { key: 'school_reg_no',       label: 'PEI Registration No.',     type: 'text' },
       { key: 'school_edutrust_no',  label: 'EduTrust Certificate No.', type: 'text' },
       { key: 'school_edutrust_exp', label: 'EduTrust Expiry',          type: 'text' },
-      { key: 'school_intake_dates', label: 'Upcoming Intake Dates',    type: 'text', placeholder: 'January 2025, July 2025' },
+      { key: 'school_intake_dates', label: 'Upcoming Intake Dates',    type: 'text', placeholder: 'JULY 2026, July 2025' },
     ],
   },
 ]

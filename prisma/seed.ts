@@ -26,7 +26,7 @@ async function main() {
     update: {},
     create: {
       id: 'announce-1',
-      message: '🎓 January 2025 intake now open — Limited seats available!',
+      message: '🎓 JULY 2026 intake now open — Limited seats available!',
       ctaLabel: 'Apply Now',
       ctaUrl: '/contact',
       bgColor: '#c8860a',
@@ -94,7 +94,7 @@ async function main() {
     update: {},
     create: {
       id: 'banner-1',
-      title: 'January 2025 Intake — Applications Open',
+      title: 'JULY 2026 Intake — Applications Open',
       subtitle: 'Secure your spot before December 31st',
       bodyText: 'Join over 500 graduates who have launched successful café careers with GCBS. Enrol now for our January cohort and get early bird pricing.',
       ctaLabel: 'Apply Now',
@@ -472,7 +472,7 @@ async function main() {
     { key: 'contact_hours',       value: 'Mon–Fri 9am–6pm, Sat 10am–2pm',   group: 'contact', label: 'Hours' },
     { key: 'school_reg_no',       value: '202000001X',                        group: 'school',  label: 'PEI Reg No' },
     { key: 'school_edutrust_no',  value: 'EDU-3-XXXX',                        group: 'school',  label: 'EduTrust No' },
-    { key: 'school_intake_dates', value: 'January 2025, July 2025',           group: 'school',  label: 'Intake Dates' },
+    { key: 'school_intake_dates', value: 'JULY 2026, July 2025',           group: 'school',  label: 'Intake Dates' },
     { key: 'social_instagram',    value: 'https://instagram.com/gcbs',        group: 'social',  label: 'Instagram' },
     { key: 'social_facebook',     value: 'https://facebook.com/gcbs',         group: 'social',  label: 'Facebook' },
   ]
