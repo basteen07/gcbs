@@ -18,7 +18,7 @@ const features = [
     desc: 'Earn globally recognised certifications from SCA (Specialty Coffee Association) alongside your diploma.',
   },
   {
-    icon: '&#128488;',
+    icon: '💼',
     title: 'Job Placement Support',
     desc: '98% employment rate within 6 months of graduation. Our career services team connects you with top café brands.',
   },
