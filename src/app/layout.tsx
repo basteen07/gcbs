@@ -7,8 +7,8 @@ export const metadata: Metadata = {
     template: '%s | Global Café Business School',
   },
   description:
-    'Professional Diploma in Café Management & Barista Skills. Learn the art and science of coffee from industry professionals. Hands-on training for cafés, restaurants, hotels, and coffee businesses.',
-  keywords: ['café management', 'barista training', 'coffee diploma', 'barista skills', 'café business school'],
+    'Professional Diploma in Café Management & Barista Skills. Learn the art and science of cafe from industry professionals. Hands-on training for cafés, restaurants, hotels, and cafe businesses.',
+  keywords: ['café management', 'barista training', 'cafe diploma', 'barista skills', 'café business school'],
   openGraph: {
     type: 'website',
     siteName: 'Global Café Business School',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>{children}</body>
+      <body className="font-body antialiased">{children}</body>
     </html>
   )
 }

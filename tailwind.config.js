@@ -47,7 +47,7 @@ module.exports = {
       },
       fontFamily: {
         display: ['var(--font-playfair)', 'Georgia', 'serif'],
-        body:    ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        body:    ['var(--font-dm-sans)', 'Arial', 'sans-serif'],
         mono:    ['var(--font-jetbrains)', 'monospace'],
       },
       backgroundImage: {

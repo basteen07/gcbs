@@ -114,7 +114,7 @@ export default function CtaSection() {
           <div className="lg:sticky lg:top-32">
             <span className="section-label">Get Started</span>
             <h2 className="section-title mb-6">
-              Begin Your <span>Coffee Journey</span><br />Today
+              Begin Your <span>Cafe Journey</span><br />Today
             </h2>
             <p className="text-coffee-600 leading-relaxed text-lg mb-8">
               Fill in your details and our admissions team will get back to you within 24 hours.

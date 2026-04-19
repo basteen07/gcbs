@@ -31,10 +31,10 @@ export default async function AboutPage() {
 
   // About section defaults
   const missionBadge = about?.missionBadge || 'Our Mission'
-  const missionTitle = about?.missionTitle || 'Transforming Coffee Passion'
+  const missionTitle = about?.missionTitle || 'Transforming Cafe Passion'
   const missionAccent = about?.missionAccent || 'into Professional Careers'
   const missionBody = about?.missionBody || 
-    'Global Café Business School was established to address a critical gap in Singapore\'s F&B education landscape. As café culture boomed, there was a clear need for structured, professional training that went beyond basic barista skills.\n\nOur founders — experienced café operators and hospitality professionals — created a curriculum that combines the science of coffee with practical business management, creating graduates who can thrive in any café environment.\n\nToday, GCBS is recognised as a leading private education institution for café and hospitality management, with graduates working across Singapore, Malaysia, Indonesia, and beyond.'
+    'Global Café Business School was established to address a critical gap in Singapore\'s F&B education landscape. As café culture boomed, there was a clear need for structured, professional training that went beyond basic barista skills.\n\nOur founders — experienced café operators and hospitality professionals — created a curriculum that combines the science of cafe with practical business management, creating graduates who can thrive in any café environment.\n\nToday, GCBS is recognised as a leading private education institution for café and hospitality management, with graduates working across Singapore, Malaysia, Indonesia, and beyond.'
   const missionImageUrl = about?.missionImageUrl || 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=900&q=85'
   const missionImageAlt = about?.missionImageAlt || 'GCBS Campus'
   const highlights = (about?.highlights as string[] | undefined) || [
@@ -46,7 +46,7 @@ export default async function AboutPage() {
   const values = (about?.values as Array<{ icon: string; title: string; description: string }> | undefined) || [
     { icon: '🎯', title: 'Excellence', description: 'We hold ourselves to the highest standards in everything we do — from teaching to customer service.' },
     { icon: '🤝', title: 'Industry Partnerships', description: 'Our curriculum is co-developed with top café operators ensuring graduates are job-ready.' },
-    { icon: '💡', title: 'Innovation', description: 'We continuously update our programmes to reflect the latest trends in specialty coffee and café management.' },
+    { icon: '💡', title: 'Innovation', description: 'We continuously update our programmes to reflect the latest trends in specialty cafe and café management.' },
     { icon: '🌱', title: 'Sustainability', description: 'We teach ethical sourcing, sustainability practices, and responsible business from day one.' },
   ]
   const ctaHeading = about?.ctaHeading || 'Ready to Join Our Community?'

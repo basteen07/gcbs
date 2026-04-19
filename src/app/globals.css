@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-playfair: 'Playfair Display', Georgia, serif;
-  --font-dm-sans:  'DM Sans', system-ui, sans-serif;
+  --font-playfair: 'Tiempos Headline', Georgia, serif;
+  --font-dm-sans: 'DM Sans', Arial, sans-serif;
 
   /* Brand tokens */
   --brand-primary:   #1d3db8;
@@ -26,21 +26,27 @@
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   body {
     font-family: var(--font-dm-sans);
+    font-weight: 400;
+    line-height: 1.65;
     background: var(--brand-base);
     color: #eef2ff;
   }
 
-  h1, h2, h3, h4, h5 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-playfair);
-    line-height: 1.15;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
 
   /* Non-heading body text follows parent contrast color */
   :where(p, span, li, a, label, small, em, strong, button, input, textarea, select, td, th, figcaption) {
+    font-family: var(--font-dm-sans);
     color: inherit;
   }
 
@@ -58,14 +64,14 @@
 @layer components {
   /* ── Buttons ──────────────────────────────── */
   .btn-primary {
-    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-sm tracking-wide
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-white text-sm tracking-wide leading-none
            bg-espresso-500 hover:bg-espresso-600 transition-all duration-200 shadow-lg hover:shadow-xl
            active:scale-95;
     font-family: var(--font-dm-sans);
   }
 
   .btn-secondary {
-    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-espresso-900 text-sm tracking-wide
+    @apply inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-espresso-900 text-sm tracking-wide leading-none
            border-2 border-espresso-500 hover:bg-espresso-700 transition-all duration-200
            active:scale-95;
     font-family: var(--font-dm-sans);
@@ -91,7 +97,7 @@
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl font-bold text-coffee-950 leading-tight;
+    @apply text-4xl md:text-5xl font-semibold text-coffee-950 leading-tight;
     font-family: var(--font-playfair);
   }
 

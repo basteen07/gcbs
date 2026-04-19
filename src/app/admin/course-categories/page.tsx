@@ -194,7 +194,7 @@ export default function CourseCategoriesPage() {
                   value={form.name} 
                   onChange={handleNameChange} 
                   className="form-input" 
-                  placeholder="e.g., Coffee Brewing"
+                  placeholder="e.g., Cafe Brewing"
                 />
               </div>
               <div>

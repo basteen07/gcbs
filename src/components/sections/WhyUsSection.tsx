@@ -4,8 +4,8 @@ import { CheckCircle2 } from 'lucide-react'
 const features = [
   {
     icon: '🔬',
-    title: 'Hands-On Coffee Lab',
-    desc: 'Train on commercial-grade espresso machines, grinders, and roasters in our fully equipped 3,000 sq ft coffee laboratory.',
+    title: 'Hands-On Cafe Lab',
+    desc: 'Train on commercial-grade espresso machines, grinders, and roasters in our fully equipped 3,000 sq ft cafe laboratory.',
   },
   {
     icon: '👨‍🏫',
@@ -37,7 +37,7 @@ export default function WhyUsSection() {
             <div className="relative rounded-3xl overflow-hidden h-96 lg:h-[500px] shadow-2xl">
               <Image
                 src="https://images.unsplash.com/photo-1509785307050-d4066910ec1e?w=900&q=85"
-                alt="Students in coffee lab"
+                alt="Students in cafe lab"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -67,7 +67,7 @@ export default function WhyUsSection() {
               Where <span>Passion</span> Meets<br />Professionalism
             </h2>
             <p className="text-coffee-200 leading-relaxed mb-8 text-lg">
-              At Global Café Business School, we believe that exceptional coffee is both an art and a science.
+              At Global Café Business School, we believe that exceptional cafe is both an art and a science.
               Our curriculum blends sensory training, business acumen, and hands-on practice to produce
               graduates who are truly café-ready from day one.
             </p>

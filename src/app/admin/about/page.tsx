@@ -24,7 +24,7 @@ type AboutData = {
 export default function AboutPage() {
   const [form, setForm] = useState<AboutData>({
     missionBadge: 'Our Mission',
-    missionTitle: 'Transforming Coffee Passion',
+    missionTitle: 'Transforming Cafe Passion',
     missionAccent: 'into Professional Careers',
     missionBody: '',
     missionImageUrl: '',

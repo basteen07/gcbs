@@ -43,7 +43,7 @@ export default function CoursesSection({ courses }: { courses?: Course[] }) {
         <div className="text-center mb-16">
           <span className="section-label">Our Programmes</span>
           <h2 className="section-title">
-            Craft Your <span>Coffee Career</span>
+            Craft Your <span>Cafe Career</span>
           </h2>
           <p className="mt-4 text-coffee-200 text-lg max-w-2xl mx-auto">
             Industry-aligned programmes designed with Singapore's leading café operators.

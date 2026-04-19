@@ -30,7 +30,7 @@ export default function HeroSection({ data }: { data: HeroData }) {
         {h.desktopImageUrl && (
           <Image
             src={h.desktopImageUrl}
-            alt="Barista crafting coffee"
+            alt="Barista crafting cafe"
             fill
             priority
             quality={90}
@@ -42,7 +42,7 @@ export default function HeroSection({ data }: { data: HeroData }) {
         {h.mobileImageUrl && (
           <Image
             src={h.mobileImageUrl}
-            alt="Barista crafting coffee"
+            alt="Barista crafting cafe"
             fill
             priority
             quality={85}
