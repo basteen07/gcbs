@@ -6,13 +6,13 @@ import WhyUsSection from '@/components/sections/WhyUsSection'
 import CtaSection from '@/components/sections/CtaSection'
 import PartnersSection from '@/components/sections/PartnersSection'
 import BannerStrip from '@/components/sections/BannerStrip'
-import GalleryPreview from '@/components/sections/GalleryPreview'
+import FounderSection from '@/components/sections/FounderSection'
 
 export const revalidate = 60
 
 async function getHomeData() {
   try {
-    const [hero, stats, courses, partners, banner, gallery] = await prisma.$transaction([
+    const [hero, stats, courses, partners, banner] = await prisma.$transaction([
       prisma.heroSection.findFirst({ where: { page: 'home', isActive: true } }),
       prisma.stat.findMany({ where: { isActive: true }, orderBy: { sortOrder: 'asc' } }),
       prisma.course.findMany({
@@ -28,14 +28,9 @@ async function getHomeData() {
       prisma.banner.findFirst({
         where: { isActive: true, placement: 'HOME_MID' },
       }),
-      prisma.galleryImage.findMany({
-        where: { isActive: true },
-        orderBy: { sortOrder: 'asc' },
-        take: 5,
-      }),
     ])
 
-    return { hero, stats, courses, partners, banner, gallery }
+    return { hero, stats, courses, partners, banner }
   } catch {
     return {
       hero: null,
@@ -43,13 +38,12 @@ async function getHomeData() {
       courses: [],
       partners: [],
       banner: null,
-      gallery: [],
     }
   }
 }
 
 export default async function HomePage() {
-  const { hero, stats, courses, partners, banner, gallery } = await getHomeData()
+  const { hero, stats, courses, partners, banner } = await getHomeData()
 
   return (
     <>
@@ -58,7 +52,7 @@ export default async function HomePage() {
       <CoursesSection courses={courses} />
       <WhyUsSection />
       {banner && <BannerStrip banner={banner} />}
-      <GalleryPreview images={gallery} />
+      <FounderSection />
       <PartnersSection partners={partners} />
       <CtaSection />
     </>

@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     siteName: 'Global Café Business School',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
   },
+  icons: {
+    icon: [{ url: '/icon', type: 'image/png', sizes: '64x64' }],
+    shortcut: ['/icon'],
+    apple: [{ url: '/apple-icon', type: 'image/png', sizes: '180x180' }],
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

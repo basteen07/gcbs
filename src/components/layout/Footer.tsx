@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Mail, Phone, MapPin, Facebook, Instagram, Youtube, Linkedin } from 'lucide-react'
-import logo from '../../logo.jpeg'
+import logo from '../../Global Cafe Logo@3x.jpg.jpeg'
+import isoBadge from '../../iso.jpeg'
 
 type SiteSettings = Record<string, string>
 
@@ -33,8 +33,6 @@ export default function Footer() {
   const emailHref = emailText ? `mailto:${emailText}` : '#'
   const addressText = settings.contact_address || ''
   const hoursText = settings.contact_hours || ''
-  const regNo = settings.school_reg_no || ''
-  const eduTrustNo = settings.school_edutrust_no || ''
 
   return (
     <footer className="bg-coffee-950 text-coffee-200">
@@ -50,12 +48,12 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-6">
-              <Image
-                src={logo}
+              <img
+                src={logo.src}
                 alt="Global Café Business School Logo"
                 width={56}
                 height={60}
-                className="object-contain"
+                className="object-contain h-[50px] w-auto"
               />
               <div>
                 <div className="text-lg font-bold text-white" style={{ fontFamily: 'var(--font-playfair)' }}>
@@ -114,10 +112,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-6 text-sm tracking-widest uppercase">Programmes</h4>
             <ul className="space-y-3">
               {[
-                { label: 'Diploma in Café Management', href: '/courses/diploma-cafe-management' },
-                { label: 'Barista Certification', href: '/courses/barista-certification' },
-                { label: 'Advanced Café Operations', href: '/courses/advanced-cafe-operations' },
-                { label: 'Postgraduate Diploma', href: '/courses/postgraduate-diploma' },
+                { label: 'Advanced Diploma in Café Management and Barista Management', href: '/courses/Advanced-Diploma-in-Café-and-Barista-Management' },
                 { label: 'Apply Now', href: '/contact' },
               ].map((l) => (
                 <li key={l.href}>
@@ -154,9 +149,11 @@ export default function Footer() {
             {hoursText && <p className="text-xs text-coffee-500 mt-3">{hoursText}</p>}
 
             <div className="mt-8 p-4 rounded-xl bg-coffee-900 border border-coffee-800">
-              <div className="text-xs text-coffee-500 uppercase tracking-widest mb-1">Accreditation</div>
-              <div className="text-sm text-coffee-300 font-medium">{eduTrustNo || '—'}</div>
-              <div className="text-xs text-coffee-500 mt-0.5">PEI Reg. No.: {regNo || '—'}</div>
+              <img
+                src={isoBadge.src}
+                alt="Accreditation"
+                className="w-full h-auto rounded-md object-contain"
+              />
             </div>
           </div>
         </div>

@@ -73,7 +73,7 @@ export default async function AboutPage() {
         <div className="container-main relative z-10 text-center">
           <span className="section-label text-espresso-300">{heroBadge}</span>
           <h1 className="text-5xl md:text-6xl font-bold text-white mt-2 mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
-            {heroHeadline}<br /><span className="text-espresso-300 italic">{heroAccent}</span>
+            {heroHeadline}<br /><span className="text-espresso-300">{heroAccent}</span>
           </h1>
           {heroSubheadline && <p className="text-cream-100 max-w-2xl mx-auto text-xl mb-3">{heroSubheadline}</p>}
           <p className="text-coffee-300 max-w-xl mx-auto text-lg">
@@ -113,10 +113,7 @@ export default async function AboutPage() {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-espresso-500 text-white rounded-2xl p-5 shadow-2xl max-w-[180px]">
-                <div className="text-3xl font-bold mb-1" style={{ fontFamily: 'var(--font-playfair)' }}>2010</div>
-                <div className="text-xs font-medium opacity-90">Est. in Singapore. 15+ years of excellence.</div>
-              </div>
+              
             </div>
           </div>
         </div>

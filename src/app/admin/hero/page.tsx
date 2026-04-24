@@ -113,7 +113,7 @@ export default function HeroPage() {
             <input value={form.headline || ''} onChange={F('headline')} className="form-input" placeholder="Professional" />
           </div>
           <div>
-            <label className="form-label">Headline Accent (italic gold)</label>
+            <label className="form-label">Headline Accent (gold)</label>
             <input value={form.headlineAccent || ''} onChange={F('headlineAccent')} className="form-input" placeholder="DIPLOMA IN CAFÉ MANAGEMENT" />
           </div>
           <div>

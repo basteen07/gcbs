@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Menu, X, ChevronDown, Phone } from 'lucide-react'
-import logo from '../../logo.jpeg'
+import logo from '../../Global Cafe Logo@3x.jpg.jpeg'
 
 type Course = {
   id: string
@@ -34,6 +33,7 @@ export default function Navbar() {
 
   const navLinks = [
     { label: 'About', href: '/about' },
+    { label: 'Founder', href: '/#founder' },
     {
       label: 'Programmes',
       href: '/courses',
@@ -53,12 +53,12 @@ export default function Navbar() {
         <nav className="flex items-center justify-between h-24">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <Image
-              src={logo}
+            <img
+              src={logo.src}
               alt="Global Café Business School Logo"
-              width={100}
-              height={110}
-              className="group-hover:scale-100 transition-transform"
+              width={92}
+              height={100}
+              className="group-hover:scale-100 transition-transform object-contain h-[68px] w-auto"
             />
             <div>
               <div

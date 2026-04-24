@@ -42,7 +42,7 @@ export default async function CoursesPage() {
             {hero?.headlineAccent && (
               <>
                 <br />
-                <span className="text-espresso-300 italic">{hero.headlineAccent}</span>
+                <span className="text-espresso-300">{hero.headlineAccent}</span>
               </>
             )}
           </h1>

@@ -32,7 +32,7 @@ export default async function ContactPage() {
           <span className="section-label text-espresso-300">{hero?.badge || 'Get In Touch'}</span>
           <h1 className="text-5xl font-bold text-white mt-2" style={{ fontFamily: 'var(--font-playfair)' }}>
             {hero?.headline || 'Contact'}{' '}
-            <span className="text-espresso-300 italic">{hero?.headlineAccent || 'GCBS'}</span>
+            <span className="text-espresso-300">{hero?.headlineAccent || 'GCBS'}</span>
           </h1>
           {hero?.bodyText && <p className="text-coffee-200 mt-4 max-w-2xl mx-auto">{hero.bodyText}</p>}
         </div>

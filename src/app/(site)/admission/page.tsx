@@ -64,7 +64,7 @@ export default async function AdmissionPage() {
         <div className="container-main relative z-10 text-center">
           <span className="section-label text-espresso-300">{heroBadge}</span>
           <h1 className="text-5xl md:text-6xl font-bold text-white mt-2 mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>
-            {heroHeadline}<br /><span className="text-espresso-300 italic">{heroAccent}</span>
+            {heroHeadline}<br /><span className="text-espresso-300">{heroAccent}</span>
           </h1>
           {heroSubheadline && <p className="text-cream-100 max-w-2xl mx-auto text-xl mb-3">{heroSubheadline}</p>}
           <p className="text-coffee-300 max-w-xl mx-auto text-lg">

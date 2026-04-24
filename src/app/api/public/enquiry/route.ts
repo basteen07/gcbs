@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    // Send email confirmation
+    // Send email notifications (admin + acknowledgement to enquirer)
     try {
       await sendEnquiryEmail({
         firstName: data.firstName,
@@ -56,10 +56,17 @@ export async function POST(req: NextRequest) {
       })
     } catch (emailError) {
       console.error('Email sending failed:', emailError)
-      // Don't fail the enquiry if email fails - still return success
+      return NextResponse.json(
+        {
+          error: 'Your enquiry was saved, but email delivery failed. Please try again shortly or contact us directly.',
+          id: candidate.id,
+          emailSent: false,
+        },
+        { status: 502 },
+      )
     }
 
-    return NextResponse.json({ success: true, id: candidate.id }, { status: 201 })
+    return NextResponse.json({ success: true, id: candidate.id, emailSent: true }, { status: 201 })
   } catch (err) {
     if (err instanceof z.ZodError) {
       return NextResponse.json({ error: 'Validation failed', details: err.errors }, { status: 422 })

@@ -40,7 +40,7 @@ export default function TestimonialsSection({ testimonials }: { testimonials?: T
             Student Stories
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white" style={{ fontFamily: 'var(--font-playfair)' }}>
-            Lives Transformed by <span className="text-espresso-400 italic">Cafe</span>
+            Lives Transformed by <span className="text-espresso-400">Cafe</span>
           </h2>
         </div>
 

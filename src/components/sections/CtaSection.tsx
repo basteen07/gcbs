@@ -9,11 +9,11 @@ import { Send, CheckCircle } from 'lucide-react'
 
 const schema = z.object({
   firstName:      z.string().min(2, 'First name required'),
-  lastName:       z.string().min(2, 'Last name required'),
+  lastName:       z.string().min(1, 'Last name required'),
   email:          z.string().email('Valid email required'),
   phone:          z.string().optional(),
   courseInterest: z.string().min(1, 'Please select a course'),
-  studentType:    z.enum(['LOCAL', 'INTERNATIONAL', 'ONLINE']),
+  studentType:    z.enum(['OFFLINE', 'ONLINE']),
   message:        z.string().optional(),
   privacyConsent: z.boolean().refine((v) => v === true, 'Please accept privacy policy'),
   marketingConsent: z.boolean().optional(),
@@ -85,7 +85,7 @@ export default function CtaSection() {
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { studentType: 'LOCAL', privacyConsent: false, marketingConsent: false },
+    defaultValues: { studentType: 'OFFLINE', privacyConsent: false, marketingConsent: false },
   })
 
   const onSubmit = async (data: FormData) => {
@@ -97,10 +97,14 @@ export default function CtaSection() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-      if (!res.ok) throw new Error('Submission failed')
+      if (!res.ok) {
+        const payload = await res.json().catch(() => null)
+        throw new Error(payload?.error || 'Submission failed')
+      }
       setSubmitted(true)
-    } catch {
-      setError('Something went wrong. Please try again or call us directly.')
+    } catch (submitError) {
+      const fallback = 'Something went wrong. Please try again or call us directly.'
+      setError(submitError instanceof Error ? submitError.message : fallback)
     } finally {
       setLoading(false)
     }
@@ -187,7 +191,6 @@ export default function CtaSection() {
                   <select {...register('courseInterest')} className="form-input">
                     <option value="">Select a programme...</option>
                     {courses.map((c) => <option key={c.id} value={c.title}>{c.title}</option>)}
-                    <option value="Not sure yet — please advise">Not sure yet — please advise</option>
                   </select>
                   {errors.courseInterest && <p className="form-error">{errors.courseInterest.message}</p>}
                 </div>
@@ -195,8 +198,7 @@ export default function CtaSection() {
                 <div>
                   <label className="form-label">Student Type *</label>
                   <select {...register('studentType')} className="form-input">
-                    <option value="LOCAL">Local Student (Singapore PR / Citizen)</option>
-                    <option value="INTERNATIONAL">International Student</option>
+                    <option value="OFFLINE">Offline Student </option>
                     <option value="ONLINE">Online / Part-Time</option>
                   </select>
                 </div>
