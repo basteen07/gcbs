@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og'
-import logo from '../Global Cafe Logo@3x.jpg.jpeg'
+import fs from 'node:fs'
+import path from 'node:path'
 
 export const size = {
   width: 180,
@@ -9,6 +10,9 @@ export const size = {
 export const contentType = 'image/png'
 
 export default function AppleIcon() {
+  const logoPath = path.join(process.cwd(), 'src', 'Global Cafe Logo@3x.jpg.jpeg')
+  const logoData = fs.readFileSync(logoPath)
+
   return new ImageResponse(
     (
       <div
@@ -22,7 +26,7 @@ export default function AppleIcon() {
         }}
       >
         <img
-          src={logo.src}
+          src={logoData.buffer as any}
           alt="Global Cafe Business School"
           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
         />
