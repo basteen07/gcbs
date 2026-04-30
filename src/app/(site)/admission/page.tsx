@@ -37,8 +37,8 @@ export default async function AdmissionPage() {
   const faqTitle = admission?.faqTitle || 'Frequently Asked Questions'
   const faqs = (admission?.faqs as Array<{ question: string; answer: string }> || []) || []
   const documents = (admission?.documents as string[] || []) || []
-  const contactEmail = admission?.contactEmail || 'admissions@gcbs.edu.sg'
-  const contactPhone = admission?.contactPhone || '+65 6XXX XXXX'
+  const contactEmail = admission?.contactEmail || 'globalcafebusinessschool@gmail.com'
+  const contactPhone = admission?.contactPhone || '9894843822'
   const contactHeading = admission?.contactHeading || 'Questions? Get in Touch'
   const contactBody = admission?.contactBody || 'Our admissions team is here to help and answer any questions you may have.'
   const ctaLabel = admission?.ctaLabel || 'Start Your Application'
