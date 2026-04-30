@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const token = process.env.BLOB_READ_WRITE_TOKEN
+  const token = process.env.BLOB1_READ_WRITE_TOKEN
   if (!token) {
     return NextResponse.json(
       { error: 'BLOB_READ_WRITE_TOKEN is not configured. Contact your administrator.' },
