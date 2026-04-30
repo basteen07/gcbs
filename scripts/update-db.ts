@@ -11,7 +11,6 @@ async function main() {
     data: [
       { label: 'Employment Rate', value: '100%', sortOrder: 1, isActive: true },
       { label: 'Industry Partners', value: '50+', sortOrder: 2, isActive: true },
-      { label: 'Years of Experience', value: '15+', sortOrder: 3, isActive: true },
       { label: 'Student Satisfaction', value: '98%', sortOrder: 4, isActive: true },
     ],
   })

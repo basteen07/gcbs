@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import Image from 'next/image'
+import founderImg from '../../Founder.png'
 
 export default function FounderSection() {
   return (
@@ -7,15 +9,20 @@ export default function FounderSection() {
         <div className="grid lg:grid-cols-5 gap-10 items-start">
           <div className="lg:col-span-2">
             <span className="section-label">Founder</span>
-            <h2 className="section-title mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
               DAVID MANOHAR <span>LANKA</span>
             </h2>
             <p className="text-coffee-200 text-lg leading-relaxed">
               David Manohar - Pioneer of South India&apos;s F&amp;B Franchise Revolution
             </p>
 
-            <div className="mt-8 rounded-2xl border border-espresso-600 bg-espresso-800 p-6">
-              <p className="text-sm text-coffee-300">Founder image will be added here.</p>
+            <div className="mt-12 rounded-2xl overflow-hidden border border-espresso-600 relative h-[400px] max-w-[350px]">
+              <Image
+                src={founderImg}
+                alt="David Manohar Lanka"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
 

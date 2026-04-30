@@ -21,23 +21,29 @@ export default function BannerStrip({ banner }: { banner: Banner }) {
     <section className="relative overflow-hidden" style={{ background: banner.bgColor || '#1a0d08' }}>
       {/* Desktop background */}
       {banner.desktopImageUrl && (
-        <Image
-          src={banner.desktopImageUrl}
-          alt={banner.title}
-          fill
-          className="object-cover hidden sm:block"
-          sizes="100vw"
-        />
+        <>
+          <Image
+            src={banner.desktopImageUrl}
+            alt={banner.title}
+            fill
+            className="object-cover hidden sm:block"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-espresso-950/70 hidden sm:block" />
+        </>
       )}
       {/* Mobile background */}
       {banner.mobileImageUrl && (
-        <Image
-          src={banner.mobileImageUrl}
-          alt={banner.title}
-          fill
-          className="object-cover sm:hidden"
-          sizes="768px"
-        />
+        <>
+          <Image
+            src={banner.mobileImageUrl}
+            alt={banner.title}
+            fill
+            className="object-cover sm:hidden"
+            sizes="768px"
+          />
+          <div className="absolute inset-0 bg-espresso-950/70 sm:hidden" />
+        </>
       )}
 
       <div className="relative z-10 container-main py-16 md:py-20">

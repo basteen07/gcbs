@@ -67,18 +67,21 @@ export default function CtaSection() {
 
   const contactCards = [
     {
-      icon: '📞',
+      key: 'phone',
+      icon: '',
       text: settings.contact_phone || '+65 0000 0000',
       sub: settings.contact_hours || 'Mon-Fri, 9am-6pm',
     },
     {
-      icon: '📧',
+      key: 'email',
+      icon: '',
       text: settings.contact_email || 'enquiry@gcbs.edu.sg',
       sub: 'We reply within 24 hours',
     },
     {
-      icon: '📍',
-      text: settings.contact_address || '123 Orchard Road, Singapore 238858',
+      key: 'address',
+      icon: '',
+      text: settings.contact_address || 'Singapore',
       sub: 'Visit us for a campus tour',
     },
   ]
@@ -117,7 +120,7 @@ export default function CtaSection() {
           {/* Left */}
           <div className="lg:sticky lg:top-32">
             <span className="section-label">Get Started</span>
-            <h2 className="section-title mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-coffee-900 mb-6">
               Begin Your <span>Cafe Journey</span><br />Today
             </h2>
             <p className="text-coffee-600 leading-relaxed text-lg mb-8">
@@ -127,7 +130,7 @@ export default function CtaSection() {
 
             <div className="space-y-4">
               {contactCards.map((c) => (
-                <div key={c.text} className="flex items-start gap-3 p-4 bg-espresso-800 rounded-xl border border-espresso-600">
+                <div key={c.key} className="flex items-start gap-3 p-4 bg-espresso-800 rounded-xl border border-espresso-600">
                   <span className="text-xl">{c.icon}</span>
                   <div>
                     <div className="font-semibold text-white text-sm">{c.text}</div>

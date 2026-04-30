@@ -13,7 +13,7 @@ export default function StatsSection({ stats }: { stats?: Stat[] }) {
         }}
       />
       <div className="container-main relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
           {items.map((stat, i) => (
             <div key={stat.id} className="text-center group">
               {stat.icon && (

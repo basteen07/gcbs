@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Mail, Phone, MapPin, Facebook, Instagram, Youtube, Linkedin } from 'lucide-react'
 import logo from '../../Global Cafe Logo@3x.jpg.jpeg'
-import isoBadge from '../../iso.jpeg'
+
 
 type SiteSettings = Record<string, string>
 
@@ -93,10 +93,6 @@ export default function Footer() {
               {[
                 { label: 'About Us', href: '/about' },
                 { label: 'Our Programmes', href: '/courses' },
-                { label: 'Our Team', href: '/about#team' },
-                { label: 'Our Facilities', href: '/about#facilities' },
-                { label: 'Gallery', href: '/gallery' },
-                { label: 'Student Testimonials', href: '/about#testimonials' },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="text-sm text-coffee-400 hover:text-espresso-400 transition-colors">
@@ -147,14 +143,6 @@ export default function Footer() {
             </ul>
 
             {hoursText && <p className="text-xs text-coffee-500 mt-3">{hoursText}</p>}
-
-            <div className="mt-8 p-4 rounded-xl bg-coffee-900 border border-coffee-800">
-              <img
-                src={isoBadge.src}
-                alt="Accreditation"
-                className="w-full h-auto rounded-md object-contain"
-              />
-            </div>
           </div>
         </div>
 

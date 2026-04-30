@@ -86,6 +86,7 @@ export default async function CourseDetailPage({ params }: Props) {
               sizes="100vw"
             />
           )}
+          <div className="absolute inset-0 bg-coffee-950/70" />
         </div>
         <div className="container-main relative z-10">
           {/* Breadcrumb */}
@@ -138,7 +139,22 @@ export default async function CourseDetailPage({ params }: Props) {
               {/* Description */}
               <div>
                 <h2 className="text-2xl font-bold text-coffee-950 mb-4" style={{ fontFamily: 'var(--font-playfair)' }}>About This Programme</h2>
-                <div className="text-coffee-700 leading-relaxed whitespace-pre-line">{course.description}</div>
+                <div className="text-coffee-700 leading-relaxed">
+                  {course.description?.startsWith('<html>') ? (
+                    <div 
+                      className="course-html-content"
+                      dangerouslySetInnerHTML={{ 
+                        __html: course.description
+                          .replace(/^<html>|<\/html>$/g, '')
+                          .replace(/<head>[\s\S]*?<\/head>/gi, '')
+                          .replace(/<body>/gi, '').replace(/<\/body>/gi, '')
+                          .replace(/<style>[\s\S]*?<\/style>/gi, '')
+                      }} 
+                    />
+                  ) : (
+                    <div className="whitespace-pre-line">{course.description}</div>
+                  )}
+                </div>
               </div>
 
               {/* Outcomes */}

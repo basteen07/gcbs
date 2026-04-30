@@ -38,7 +38,6 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-playfair);
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.02em;
@@ -98,14 +97,27 @@
 
   .section-title {
     @apply text-4xl md:text-5xl font-semibold text-coffee-950 leading-tight;
-    font-family: var(--font-playfair);
   }
 
   .section-title span {
     @apply text-espresso-500;
   }
 
-  /* ── Cards ────────────────────────────────── */
+  /* Course HTML Content */
+  .course-html-content section {
+    @apply bg-espresso-50 p-5 rounded-lg mb-4 border border-espresso-100;
+  }
+  .course-html-content h2 {
+    @apply text-lg font-semibold text-coffee-950 mb-3 flex items-center gap-2;
+  }
+  .course-html-content ul {
+    @apply pl-5 m-0;
+  }
+  .course-html-content li {
+    @apply text-sm text-coffee-700 leading-relaxed mb-2;
+  }
+
+  /* Cards ────────────────────────────────── */
   .card-hover {
     @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
   }

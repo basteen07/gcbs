@@ -42,7 +42,7 @@ export default function CoursesSection({ courses }: { courses?: Course[] }) {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="section-label">Our Programmes</span>
-          <h2 className="section-title">
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
             Craft Your <span>Cafe Career</span>
           </h2>
           <p className="mt-4 text-coffee-200 text-lg max-w-2xl mx-auto">

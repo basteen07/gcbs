@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
+import isoBadge from '../../iso.jpeg'
 
 type HeroData = {
   badge?: string | null
@@ -40,11 +41,16 @@ export default function HeroSection({ data }: { data: HeroData }) {
           />
           <div className="relative z-10 w-full px-8 md:px-10 py-12 md:py-16">
             <h2
-              className="text-4xl md:text-3xl font-bold text-white leading-tight"
+              className="text-4xl md:text-5xl font-bold text-white leading-tight"
               style={{ fontFamily: 'var(--font-playfair)' }}
             >
               DIPLOMA IN CAFE MANAGEMENT
             </h2>
+            <img
+              src={isoBadge.src}
+              alt="ISO Certified"
+              className="mt-3 object-contain h-12 w-auto"
+            />
             <p className="text-lg md:text-base text-coffee-200 leading-relaxed mt-3 mb-8">
               Learn the art and science of coffee from industry professionals. Our hands-on training prepares students for careers in cafes, restaurants, hotels, and coffee businesses.
             </p>

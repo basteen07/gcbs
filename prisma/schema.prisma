@@ -224,6 +224,7 @@ enum StudentType {
   LOCAL
   INTERNATIONAL
   ONLINE
+  OFFLINE
 }
 
 enum CandidateStatus {

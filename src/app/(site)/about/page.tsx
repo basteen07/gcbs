@@ -69,6 +69,7 @@ export default async function AboutPage() {
               sizes="100vw"
             />
           )}
+          <div className="absolute inset-0 bg-coffee-950/70" />
         </div>
         <div className="container-main relative z-10 text-center">
           <span className="section-label text-espresso-300">{heroBadge}</span>

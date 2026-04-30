@@ -27,14 +27,14 @@ export default async function AnnouncementBar() {
 
   return (
     <div
-      className="w-full py-2.5 px-4 text-center text-sm font-medium relative"
+      className="w-full py-3 px-4 text-center text-base md:text-lg font-bold relative"
       style={{ background: announcement.bgColor, color: announcement.textColor }}
     >
       <span>{announcement.message}</span>
       {announcement.ctaLabel && announcement.ctaUrl && (
         <Link
           href={announcement.ctaUrl}
-          className="ml-3 underline font-semibold hover:opacity-80 transition-opacity"
+          className="ml-3 underline font-bold hover:opacity-80 transition-opacity"
         >
           {announcement.ctaLabel} →
         </Link>

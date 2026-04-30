@@ -20,9 +20,7 @@ export default function GalleryPreview({ images }: { images?: GalleryItem[] }) {
             <span className="section-label">Our Campus & Facilities</span>
             <h2 className="section-title">Inside <span>GCBS</span></h2>
           </div>
-          
         </div>
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 auto-rows-[200px]">
           {items.map((img, i) => (
             <div key={img.id} className={`relative rounded-2xl overflow-hidden group ${i === 0 ? 'col-span-2 row-span-2' : ''}`}>

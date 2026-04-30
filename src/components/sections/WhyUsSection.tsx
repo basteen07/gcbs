@@ -43,7 +43,7 @@ export default function WhyUsSection() {
             </div>
             {/* Floating card */}
             <div className="absolute -bottom-8 -right-6 bg-espresso-700 rounded-2xl shadow-2xl p-5 max-w-[200px] border border-espresso-500">
-              <div className="text-xs text-coffee-200 font-medium">Graduate employment within 12 months</div>
+              <div className="text-xl text-coffee-200 font-bolt">Graduate employment within 12 months</div>
             </div>
             {/* Small accent image */}
            
@@ -52,7 +52,7 @@ export default function WhyUsSection() {
           {/* Right — content */}
           <div>
             <span className="section-label text-2xl">Why Choose GCBS</span>
-            <h2 className="section-title text-3xl md:text-3xl mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               Where <span>Passion</span> Meets<br />Professionalism
             </h2>
             <p className="text-coffee-200 leading-relaxed mb-8 text-lg">

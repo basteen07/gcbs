@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X, ChevronDown, Phone } from 'lucide-react'
 import logo from '../../Global Cafe Logo@3x.jpg.jpeg'
+import isoBadge from '../../iso.jpeg'
 
 type Course = {
   id: string
@@ -60,10 +61,9 @@ export default function Navbar() {
               height={100}
               className="group-hover:scale-100 transition-transform object-contain h-[68px] w-auto"
             />
-            <div>
+            <div className="flex flex-col">
               <div
                 className="text-lg font-bold leading-tight text-white"
-                style={{ fontFamily: 'var(--font-playfair)' }}
               >
                 Global Café
               </div>

@@ -218,8 +218,26 @@ export default function CoursesPage() {
                   <input value={form.tagline} onChange={F('tagline')} className="form-input" placeholder="Short compelling description" />
                 </div>
                 <div className="col-span-2">
-                  <label className="form-label">Full Description *</label>
-                  <textarea value={form.description} onChange={F('description')} rows={4} className="form-input resize-none" />
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="form-label mb-0">Full Description *</label>
+                    <button
+                      type="button"
+                      onClick={() => setForm({ ...form, description: form.description.startsWith('<html>') ? form.description.replace('<html>', '').replace('</html>', '') : '<html>' + form.description + '</html>' })}
+                      className="text-xs px-2 py-1 bg-espresso-100 text-espresso-700 rounded hover:bg-espresso-200"
+                    >
+                      {form.description.startsWith('<html>') ? 'HTML Mode' : 'Normal Mode'}
+                    </button>
+                  </div>
+                  <textarea 
+                    value={form.description.replace(/^<html>|<\/html>$/g, '')} 
+                    onChange={F('description')} 
+                    rows={6} 
+                    className="form-input resize-none font-mono text-sm" 
+                    placeholder={form.description.startsWith('<html>') ? '<p>Use HTML tags like &lt;p&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;li&gt;</p>' : 'Enter description...'}
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    {form.description.startsWith('<html>') ? 'HTML mode: Use &lt;p&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;br&gt; tags' : 'Switch to HTML mode for rich formatting'}
+                  </p>
                 </div>
                 <div>
                   <label className="form-label">Duration</label>
@@ -231,11 +249,11 @@ export default function CoursesPage() {
                 </div>
                 <div>
                   <label className="form-label">Local Fee</label>
-                  <input type="number" value={form.localFee} onChange={F('localFee')} className="form-input" placeholder="8500" />
+                  <input type="number" value={form.localFee || ''} onChange={F('localFee')} className="form-input" placeholder="8500" />
                 </div>
                 <div>
                   <label className="form-label">International Fee</label>
-                  <input type="number" value={form.intlFee} onChange={F('intlFee')} className="form-input" placeholder="12000" />
+                  <input type="number" value={form.intlFee || ''} onChange={F('intlFee')} className="form-input" placeholder="12000" />
                 </div>
               </div>
 
