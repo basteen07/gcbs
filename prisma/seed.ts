@@ -172,7 +172,7 @@ async function main() {
       isActive: true,
       sortOrder: 1,
       metaTitle: 'Diploma in Café Management | Global Café Business School',
-      metaDescription: 'Professional 12-month Diploma in Café Management. Learn cafe science, business management, and hospitality. Industry-recognised certification in Singapore.',
+      metaDescription: 'Professional 12-month Diploma in Café Management. Learn cafe science, business management, and hospitality. Industry-recognised certification.',
     },
     {
       categoryId: catMap['barista-skills'],
@@ -353,7 +353,7 @@ async function main() {
   const team = [
     {
       name: 'Chef David Lim', title: 'Academic Director', department: 'Faculty',
-      bio: 'Former World Barista Championship finalist with 20 years of industry experience across Singapore and Japan.',
+      bio: 'Former World Barista Championship finalist with 20 years of industry experience across chennai and Mumbai.',
       qualifications: ['SCA Professional', 'Certified Q Grader', 'MBA Hospitality Management'],
       specializations: ['Espresso Science', 'Sensory Analysis', 'Business Strategy'],
       photoDesktop: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80',
@@ -371,7 +371,7 @@ async function main() {
     },
     {
       name: 'Mr. Ahmad Rashid', title: 'Business & Entrepreneurship Lecturer', department: 'Faculty',
-      bio: 'Serial café entrepreneur who has founded and scaled three café brands across Singapore, Malaysia, and Indonesia.',
+      bio: 'Serial café entrepreneur who has founded and scaled three café brands across Chennai, Mumbai, and Bangaluru.',
       qualifications: ['MBA (NUS)', 'BA Business Administration', 'Certified Business Coach'],
       specializations: ['Café Business Planning', 'Financial Management', 'Franchise Development'],
       photoDesktop: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80',

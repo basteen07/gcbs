@@ -136,7 +136,7 @@ export default function TestimonialsPage() {
                 </div>
                 <div>
                   <label className="form-label">Role</label>
-                  <input value={form.role} onChange={F('role')} className="form-input" placeholder="Café Owner, Singapore" />
+                  <input value={form.role} onChange={F('role')} className="form-input" placeholder="Café Owner" />
                 </div>
               </div>
               <div>

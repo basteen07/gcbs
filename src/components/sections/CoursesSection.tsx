@@ -46,7 +46,7 @@ export default function CoursesSection({ courses }: { courses?: Course[] }) {
             Craft Your <span>Cafe Career</span>
           </h2>
           <p className="mt-4 text-coffee-200 text-lg max-w-2xl mx-auto">
-            Industry-aligned programmes designed with Singapore's leading café operators.
+            Industry-aligned programmes designed with leading café operators.
             From barista fundamentals to full business management.
           </p>
         </div>

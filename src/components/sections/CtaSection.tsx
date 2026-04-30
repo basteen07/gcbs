@@ -81,7 +81,7 @@ export default function CtaSection() {
     {
       key: 'address',
       icon: '',
-      text: settings.contact_address || 'Singapore',
+      text: settings.contact_address || 'India',
       sub: 'Visit us for a campus tour',
     },
   ]

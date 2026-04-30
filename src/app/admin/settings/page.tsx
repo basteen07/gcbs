@@ -12,7 +12,7 @@ const SETTING_GROUPS = [
     keys: [
       { key: 'contact_phone',   label: 'Phone Number',  type: 'text', placeholder: '+65 0000 0000' },
       { key: 'contact_email',   label: 'Email Address', type: 'text', placeholder: 'enquiry@gcbs.edu.sg' },
-      { key: 'contact_address', label: 'Address',       type: 'text', placeholder: '123 Orchard Road, Singapore' },
+      { key: 'contact_address', label: 'Address',       type: 'text', placeholder: '123 Orchard Road' },
       { key: 'contact_hours',   label: 'Office Hours',  type: 'text', placeholder: 'Mon–Fri 9am–6pm' },
     ],
   },
