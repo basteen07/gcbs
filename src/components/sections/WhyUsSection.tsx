@@ -12,7 +12,7 @@ const features = [
   {
     icon: '🌐',
     title: 'International Certification',
-    desc: 'Earn globally recognised certifications from SCA (Specialty Coffee Association) alongside your diploma.',
+    desc: 'Earn globally recognised certifications from Dr. APJ Abdul Kalam International Foundation alongside your diploma.',
   },
   {
     icon: '💼',

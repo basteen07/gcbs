@@ -39,7 +39,7 @@ export default async function AboutPage() {
   const missionImageAlt = about?.missionImageAlt || 'GCBS Campus'
   const highlights = (about?.highlights as string[] | undefined) || [
     'EduTrust Certified Private Education Institution',
-    'SCA Approved Training Centre',
+    'ISO Approved Training Centre',
     'Industry Advisory Board with 10+ café leaders',
     'Job placement support for all graduates'
   ]

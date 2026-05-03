@@ -180,7 +180,7 @@ async function main() {
       slug: 'barista-certification',
       tagline: 'Professional barista skills recognised worldwide',
       description: `Our Barista Certification Programme is the perfect starting point for cafe enthusiasts who want to turn their passion into a profession. Over 6 intensive months, students learn the complete spectrum of barista skills from green bean selection to advanced latte art.\n\nAligned with SCA (Specialty Coffee Association) standards, graduates earn an internationally recognised certification that opens doors across Asia, Europe, and beyond.`,
-      duration: '6 months',
+      duration: '12 months',
       durationWeeks: 26,
       level: 'CERTIFICATE',
       localFee: 4500,
