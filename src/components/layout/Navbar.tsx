@@ -63,14 +63,19 @@ export default function Navbar() {
             />
             <div className="flex flex-col">
               <div
-                className="text-lg font-bold leading-tight text-white"
+                className="lg:text-3xl sm:text-3xl font-bold leading-tight text-white"
               >
                 Global Café
               </div>
-              <div className="text-xs text-coffee-300 font-semibold tracking-widest uppercase">
+              <div className="lg:text-xl sm:text-lg text-coffee-300 font-semibold tracking-widest uppercase">
                 Business School
               </div>
             </div>
+            <img
+              src={isoBadge.src}
+              alt="ISO Certified"
+              className="ml-2 object-contain h-14 w-auto"
+            />
           </Link>
 
           {/* Desktop links */}

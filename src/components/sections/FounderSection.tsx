@@ -16,12 +16,13 @@ export default function FounderSection() {
               David Manohar - Pioneer of South India&apos;s F&amp;B Franchise Revolution
             </p>
 
-            <div className="mt-12 rounded-2xl overflow-hidden border border-espresso-600 relative h-[400px] max-w-[350px]">
+            <div className="mt-12 rounded-2xl overflow-hidden border border-espresso-600 relative h-[400px] max-w-[350px] shadow-2xl">
               <Image
                 src={founderImg}
                 alt="David Manohar Lanka"
                 fill
                 className="object-cover"
+                style={{ filter: 'contrast(1.1) brightness(1.15) saturate(1.35) drop-shadow(0 0 25px rgba(0,0,0,0.4))' }}
               />
             </div>
           </div>
