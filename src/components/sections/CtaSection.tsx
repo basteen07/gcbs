@@ -13,7 +13,6 @@ const schema = z.object({
   email:          z.string().email('Valid email required'),
   phone:          z.string().optional(),
   courseInterest: z.string().min(1, 'Please select a course'),
-  studentType:    z.enum(['OFFLINE', 'ONLINE']),
   message:        z.string().optional(),
   privacyConsent: z.boolean().refine((v) => v === true, 'Please accept privacy policy'),
   marketingConsent: z.boolean().optional(),
@@ -88,7 +87,7 @@ export default function CtaSection() {
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { studentType: 'OFFLINE', privacyConsent: false, marketingConsent: false },
+    defaultValues: { privacyConsent: false, marketingConsent: false },
   })
 
   const onSubmit = async (data: FormData) => {
@@ -196,14 +195,6 @@ export default function CtaSection() {
                     {courses.map((c) => <option key={c.id} value={c.title}>{c.title}</option>)}
                   </select>
                   {errors.courseInterest && <p className="form-error">{errors.courseInterest.message}</p>}
-                </div>
-
-                <div>
-                  <label className="form-label">Student Type *</label>
-                  <select {...register('studentType')} className="form-input">
-                    <option value="OFFLINE">Offline Student </option>
-                    <option value="ONLINE">Online / Part-Time</option>
-                  </select>
                 </div>
 
                 <div>
